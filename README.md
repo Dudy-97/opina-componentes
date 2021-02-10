@@ -2,9 +2,11 @@
 
 
 
-Nombre applicacion web:   "    "
+Nombre applicacion web:   "  Dad-componetes  "
 
-Descripción tematica de la web:
+Descripción tematica de la web: 
+
+ Páguina web para opinar sobre árticulos y piezas de ordenadores.
 
 
 Entidades:
