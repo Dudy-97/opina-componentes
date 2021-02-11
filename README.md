@@ -32,6 +32,7 @@ Los usuarios reciben notificaciones en algunos momentos, por ejemplo cuando:
 La administración de los productos de la aplicación web como dar de alta nuevos productos.
 
 # Integrantes del grupo:
+
  - Ángel Fernández Sánchez (a.fernandezsa.2016@alumnos.urjc.es) GitHub: Dudy-97 
  - Víctor Joaquín Frías Torres (vjfrias@alumnos.urjc.es) GitHub: qvicfri1
 
