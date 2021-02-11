@@ -4,7 +4,7 @@
 
  # Descripción tematica de la web: 
 
-Aplicación web para opinar sobre árticulos y piezas de ordenadores. Los usuarios se pueden diferenciar entre invitado, usuario
+Aplicación web para opinar sobre artículos y piezas de ordenadores. Los usuarios se pueden diferenciar entre invitado, usuario
 y administrador. El invitado sólo tiene posibilidad de ver la web sin realizar cambios en ella. El usuario registrado tiene la posibilidad de opinar sobre
 los artículos, añadir a favoritos los que le gusten, por lo que lo único que tendría
 de privado serían sus datos personales y algunos datos más como amigos añadidos. El administrador tiene la posibilidad de crear y 
