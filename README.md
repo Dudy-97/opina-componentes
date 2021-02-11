@@ -1,8 +1,5 @@
-# opina-componentes
+# OpinaComponentes
 
-
-
-Nombre applicacion web:   "OpinaComponentes"
 
 
  # Descripción tematica de la web: 
