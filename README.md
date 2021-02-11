@@ -5,7 +5,7 @@
 Nombre applicacion web:   "OpinaComponentes"
 
 
-Descripción tematica de la web: 
+ # Descripción tematica de la web: 
 
 Aplicación web para opinar sobre árticulos y piezas de ordenadores. Los usuarios se pueden diferenciar entre invitado, usuario
 y administrador. El invitado sólo tiene posibilidad de ver la web sin realizar cambios en ella. El usuario registrado tiene la posibilidad de opinar sobre
@@ -14,7 +14,7 @@ de privado serían sus datos personales y algunos datos más como amigos añadid
 eliminar articulos, así como algunos moderar las opiniones de los usuarios o llegar a  bloquear temporalmente algún usuario.
 
 
-Entidades:
+# Entidades:
  
 Producto --> Articulos de una categoría en concreto sobre el que se va a valorar y poner una reseña.
 
@@ -25,7 +25,7 @@ Usuario --> Cliente de la página que escribe opiniones sobre distintos artícul
 Opinion --> Valoracíon de los usuarios sobre los productos de la web.
 
 
-Descripción de las funcionalidades del servicio interno:
+# Descripción de las funcionalidades del servicio interno:
 
 Los usuarios reciben notificaciones en algunos momentos, por ejemplo cuando:
  - Salen nuevos productos.
@@ -34,7 +34,7 @@ Los usuarios reciben notificaciones en algunos momentos, por ejemplo cuando:
 
 La administración de los productos de la aplicación web como dar de alta nuevos productos.
 
-Integrantes del grupo:
+# Integrantes del grupo:
  - Ángel Fernández Sánchez (a.fernandezsa.2016@alumnos.urjc.es) GitHub: Dudy-97 
  - Víctor Joaquín Frías Torres (vjfrias@alumnos.urjc.es) GitHub: qvicfri1
 
