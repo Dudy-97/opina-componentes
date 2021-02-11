@@ -27,7 +27,7 @@ Opinion --> Valoracíon de los usuarios sobre los productos de la web.
 Los usuarios reciben notificaciones en algunos momentos, por ejemplo cuando:
  - Salen nuevos productos.
  - Le envian una solicitud de amistad
- - Algún administrador a moderado alguna de sus valoraciones o ha sido baneado.
+ - Algún administrador ha moderado alguna de sus valoraciones o ha sido baneado.
 
 La administración de los productos de la aplicación web como dar de alta nuevos productos.
 
