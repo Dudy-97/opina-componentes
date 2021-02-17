@@ -8,6 +8,7 @@ public class OpinaComponentesApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(OpinaComponentesApplication.class, args);
+		//hola mundos
 	}
 
 }
