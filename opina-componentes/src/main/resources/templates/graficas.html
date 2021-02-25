@@ -1,0 +1,13 @@
+{{>header}}
+        
+       	{{#graficas}}
+			<a href="/graficas/{{-index}}">{{nombre}} {{precio}}</a>
+			<br>
+		{{/graficas}}
+		
+		{{^graficas}}
+			<p>No hay gráficas</p>
+		{{/graficas}}       
+       	<a href="/">Pagina principal</a>
+    </body>
+</html>

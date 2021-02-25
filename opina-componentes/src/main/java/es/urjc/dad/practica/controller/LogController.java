@@ -1,4 +1,4 @@
-package es.urjc.dad.practica;
+package es.urjc.dad.practica.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
