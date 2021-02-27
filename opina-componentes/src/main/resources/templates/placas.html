@@ -1,6 +1,18 @@
 {{>header}}
-        
+
        <p> Esta es la pagina de las placas</p>
+
+       {{#placas}}
+           <a href="/placas/{{-index}}">{{nombre}} {{precio}}</a>
+            <br>
+        {{/placas}}
+
+
+        {{^placas}}
+            <p>No hay placas </p>
+        {{/placas}}
+
+
        <a href="/">Pagina principal</a>
     </body>
 </html>

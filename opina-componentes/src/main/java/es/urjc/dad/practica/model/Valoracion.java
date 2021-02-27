@@ -11,7 +11,6 @@ public class Valoracion {
 	public Valoracion() {}
 	
 	public Valoracion(Usuario usuario, Producto producto, int nota, String texto) {
-		super();
 		this.usuario = usuario;
 		this.producto = producto;
 		this.nota = nota;
