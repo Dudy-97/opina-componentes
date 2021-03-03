@@ -1,8 +1,19 @@
 {{>header}}
 
+
 		<p>Nombre: {{producto.nombre}}</p>
 		<p>Descripcion: {{producto.descripcion}}</p>
 		<p>Precio: {{producto.precio}}</p>
+		<br>
+		
+		<p>Valoraciones de los usuarios</p>
+		<hr/>
+		{{#valoraciones}}
+			<p>Usuario: {{usuario.nombre}}</p>
+			<p>Nota: {{nota}}</p>
+			<p>{{texto}}</p>>
+			<br><hr>
+		{{/valoraciones}}
 		
 		<br>
 		<a href="/">Pagina principal</a>

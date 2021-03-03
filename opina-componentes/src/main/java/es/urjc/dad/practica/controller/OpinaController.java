@@ -1,5 +1,7 @@
 package es.urjc.dad.practica.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +21,12 @@ public class OpinaController {
 	@Autowired
 	private ProductoService productoService;
 	
+	@Autowired
+	private CategoriaService categoriaService;
+	
+	@Autowired
+	private ValoracionService valoracionService;
+	
 	@GetMapping("/login")
 	public String login(Model model) {
 		
@@ -33,12 +41,18 @@ public class OpinaController {
 	
 	@GetMapping("/procesadores")
 	public String procesadores(Model model) {
+		List<Producto> procesadores = productoService.findAllByCategoria("procesadores");
+		
+		model.addAttribute("procesadores", procesadores);
 		
 		return "procesadores";
 	}
 	
 	@GetMapping("/graficas")
 	public String graficas(Model model) {
+		List<Producto> graficas = productoService.findAllByCategoria("graficas");
+		
+		model.addAttribute("graficas", graficas);
 		
 		return "graficas";
 	}
@@ -51,14 +65,21 @@ public class OpinaController {
 	
 	@GetMapping("/graficas/{graficaId}")
 	public String mostrarProducto(Model model, @PathVariable int graficaId) {
+		Producto grafica = productoService.findById(graficaId);
+		
+		model.addAttribute("producto", grafica);
+		model.addAttribute("valoraciones", grafica.getValoraciones());
 		
 		return "producto";
 	}
 	
 	@GetMapping("/procesadores/{procesadorId}")
     public String mostrarProcesador(Model model, @PathVariable int procesadorId) {
-
-        return "producto";
+        Producto procesador = productoService.findById(procesadorId);
+        
+        model.addAttribute("producto", procesador);
+        
+		return "producto";
     }
 
     @GetMapping("/placas/{placaId}") 

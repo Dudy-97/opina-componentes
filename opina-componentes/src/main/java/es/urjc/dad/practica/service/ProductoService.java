@@ -1,6 +1,8 @@
 package es.urjc.dad.practica.service;
 
 import java.util.Collection;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.atomic.AtomicLong;
@@ -27,6 +29,7 @@ public class ProductoService {
 	public void init() {
 		save(new Producto("RTX 3070", "una buena grafica", 500, categoriaService.buscarPorNombre("graficas")));
 		save(new Producto("RTX 3090", "una grafica mas mejor", 1500, categoriaService.buscarPorNombre("graficas")));
+		save(new Producto("Ryzen 9", "el proc", 400, categoriaService.buscarPorNombre("procesadores")));
 	}
 	
 	public void save(Producto producto) {
@@ -39,6 +42,17 @@ public class ProductoService {
 	
 	public Collection<Producto> findAll() {
 		return productos.values();
+	}
+	
+	public List<Producto> findAllByCategoria(String categoria) {
+		List<Producto> aux = new ArrayList<>();
+		for(Producto producto : productos.values()) {
+			if(producto.getCategoria().getNombre().equalsIgnoreCase(categoria)) {
+				aux.add(producto);
+			}
+		}
+		
+		return aux;
 	}
 	
 	public Producto findById(long id) {

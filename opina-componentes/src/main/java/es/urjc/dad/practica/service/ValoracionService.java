@@ -10,6 +10,7 @@ import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import es.urjc.dad.practica.model.Producto;
 import es.urjc.dad.practica.model.Valoracion;
 
 @Service
@@ -40,6 +41,8 @@ public class ValoracionService {
 		valoracion.setId(id);
 		
 		this.valoraciones.put(id, valoracion);
+		Producto producto = productoService.buscarPorNombre(valoracion.getProducto().getNombre());
+		producto.addValoracion(valoracion);
 	}
 	
 	public Collection<Valoracion> findAll() {
