@@ -3,12 +3,24 @@ package es.urjc.dad.practica.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+@Entity
 public class Categoria {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
+	
 	private String nombre;
 
-	private List<Producto> productos;
+	@OneToMany(mappedBy="categoria", cascade=CascadeType.ALL)
+	private List<Producto> lProductos;
 	
 	public Categoria() {}
 	
@@ -16,11 +28,17 @@ public class Categoria {
 		super();
 		this.nombre = nombre;
 		
-		productos = new ArrayList<>();
+		lProductos = new ArrayList<>();
 	}
 	
 	public void addProducto(Producto producto) {
-		productos.add(producto);
+		lProductos.add(producto);
+		producto.setCategoria(this);
+	}
+	
+	public void removeProducto(Producto producto) {
+		lProductos.remove(producto);
+		producto.setCategoria(null);
 	}
 
 	public Long getId() {
@@ -39,16 +57,16 @@ public class Categoria {
 		this.nombre = nombre;
 	}
 
-	public List<Producto> getProductos() {
-		return productos;
+	public List<Producto> getlProductos() {
+		return lProductos;
 	}
 
-	public void setProductos(List<Producto> productos) {
-		this.productos = productos;
+	public void setlProductos(List<Producto> lProductos) {
+		this.lProductos = lProductos;
 	}
 
 	@Override
 	public String toString() {
-		return "Categoria [id=" + id + ", nombre=" + nombre + "]";
+		return "Categoria [id=" + id + ", nombre=" + nombre + ", lProductos=" + lProductos + "]";
 	}
 }

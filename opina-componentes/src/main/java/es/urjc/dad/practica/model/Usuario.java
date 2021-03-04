@@ -3,29 +3,48 @@ package es.urjc.dad.practica.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+@Entity
 public class Usuario {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
+	
 	private String email;
 	private String nombre;
 	private String pass;
 	
-	private List<Valoracion> valoraciones; 
+	@OneToMany(mappedBy="usuario", cascade = CascadeType.ALL)
+	private List<Valoracion> lValoraciones; 
 	
 	public Usuario() {}
 	
 	public Usuario(String email, String nombre, String pass) {
+		super();
 		this.email = email;
 		this.nombre = nombre;
 		this.pass = pass;
 		
-		valoraciones = new ArrayList<>();
-	}
-	
-	public void addValoracion(Valoracion valoracion) {
-		valoraciones.add(valoracion);
+		lValoraciones = new ArrayList<>();
 	}
 
+	public void addValoracion(Valoracion valoracion) {
+		lValoraciones.add(valoracion);
+		valoracion.setUsuario(this);
+	}
+	
+	public void removeValoracion(Valoracion valoracion) {
+		lValoraciones.remove(valoracion);
+		valoracion.setUsuario(null);
+	}
+	
 	public Long getId() {
 		return id;
 	}
@@ -58,16 +77,17 @@ public class Usuario {
 		this.pass = pass;
 	}
 
-	public List<Valoracion> getValoraciones() {
-		return valoraciones;
+	public List<Valoracion> getlValoraciones() {
+		return lValoraciones;
 	}
 
-	public void setValoraciones(List<Valoracion> valoraciones) {
-		this.valoraciones = valoraciones;
+	public void setlValoraciones(List<Valoracion> lValoraciones) {
+		this.lValoraciones = lValoraciones;
 	}
 
 	@Override
 	public String toString() {
-		return "Usuario [id=" + id + ", email=" + email + ", nombre=" + nombre + ", pass=" + pass + "]";
+		return "Usuario [id=" + id + ", email=" + email + ", nombre=" + nombre + ", pass=" + pass + ", lValoraciones="
+				+ lValoraciones + "]";
 	}
 }

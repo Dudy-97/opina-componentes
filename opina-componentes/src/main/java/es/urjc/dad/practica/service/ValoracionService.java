@@ -1,23 +1,21 @@
 package es.urjc.dad.practica.service;
 
 import java.util.Collection;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
-import java.util.concurrent.atomic.AtomicLong;
+import java.util.Optional;
 
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import es.urjc.dad.practica.model.Producto;
 import es.urjc.dad.practica.model.Valoracion;
+import es.urjc.dad.practica.repository.ValoracionRepository;
 
 @Service
 public class ValoracionService {
 
-	private ConcurrentMap<Long, Valoracion> valoraciones = new ConcurrentHashMap<>();
-	private AtomicLong nextId = new AtomicLong();
+	@Autowired
+	private ValoracionRepository valoraciones;
 	
 	@Autowired
 	private UsuarioService usuarioService;
@@ -36,25 +34,19 @@ public class ValoracionService {
 	}
 	
 	public void save(Valoracion valoracion) {
-		long id = nextId.getAndIncrement();
-		
-		valoracion.setId(id);
-		
-		this.valoraciones.put(id, valoracion);
-		Producto producto = productoService.buscarPorNombre(valoracion.getProducto().getNombre());
-		producto.addValoracion(valoracion);
+		valoraciones.save(valoracion);
 	}
 	
 	public Collection<Valoracion> findAll() {
-		return valoraciones.values();
+		return valoraciones.findAll();
 	}
 	
-	public Valoracion findById(long id) {
-		return valoraciones.get(id);
+	public Optional<Valoracion> findById(long id) {
+		return valoraciones.findById(id);
 	}
 	
 	public void deleteById(long id) {
-		this.valoraciones.remove(id);
+		this.valoraciones.deleteById(id);
 	}
 }
 

@@ -3,15 +3,31 @@ package es.urjc.dad.practica.model;
 import java.util.ArrayList;
 import java.util.List;
 
+
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
+@Entity
 public class Producto {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
+	
     private String nombre;
     private String descripcion;
     private float precio;
+    
+    @ManyToOne
     private Categoria categoria;
     
-    private List<Valoracion> valoraciones;
+    @OneToMany(mappedBy="producto", cascade=CascadeType.ALL)
+    private List<Valoracion> lValoraciones;
 
     public Producto() {}
 
@@ -22,13 +38,19 @@ public class Producto {
         this.precio = precio;
         this.categoria = categoria;
         
-        valoraciones = new ArrayList<>();
+        lValoraciones = new ArrayList<>();
     }
     
     public void addValoracion(Valoracion valoracion) {
-    	valoraciones.add(valoracion);
+    	lValoraciones.add(valoracion);
+    	valoracion.setProducto(this);
     }
     
+    public void removeValoracion(Valoracion valoracion) {
+    	lValoraciones.remove(valoracion);
+    	valoracion.setProducto(null);
+    }
+
 	public long getId() {
 		return id;
 	}
@@ -69,19 +91,17 @@ public class Producto {
 		this.categoria = categoria;
 	}
 
-	public List<Valoracion> getValoraciones() {
-		return valoraciones;
+	public List<Valoracion> getlValoraciones() {
+		return lValoraciones;
 	}
 
-	public void setValoraciones(List<Valoracion> valoraciones) {
-		this.valoraciones = valoraciones;
+	public void setlValoraciones(List<Valoracion> lValoraciones) {
+		this.lValoraciones = lValoraciones;
 	}
 
 	@Override
 	public String toString() {
 		return "Producto [id=" + id + ", nombre=" + nombre + ", descripcion=" + descripcion + ", precio=" + precio
-				+ ", categoria=" + categoria + "]";
+				+ ", categoria=" + categoria + ", lValoraciones=" + lValoraciones + "]";
 	}
-    
-    
 }

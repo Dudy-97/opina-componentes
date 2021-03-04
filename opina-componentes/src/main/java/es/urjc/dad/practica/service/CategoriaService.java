@@ -1,48 +1,49 @@
 package es.urjc.dad.practica.service;
 
 import java.util.Collection;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
-import java.util.concurrent.atomic.AtomicLong;
+import java.util.Optional;
 
+import javax.annotation.PostConstruct;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import es.urjc.dad.practica.model.Categoria;
+import es.urjc.dad.practica.repository.CategoriaRepository;
 
 @Service
 public class CategoriaService {
 
-	private ConcurrentMap<Long, Categoria> categorias = new ConcurrentHashMap<>();
-	private AtomicLong nextId = new AtomicLong();
+	@Autowired
+	private CategoriaRepository categorias;
 	
-	public CategoriaService() {
-		save(new Categoria("Graficas"));
+	public CategoriaService() {}
+	
+	@PostConstruct
+	public void init() {
+		save(new Categoria("Tarjetas graficas"));
 		save(new Categoria("Procesadores"));
 		save(new Categoria("Placas base"));
 	}
 	
 	public void save(Categoria categoria) {
-		long id = nextId.getAndIncrement();
-		
-		categoria.setId(id);
-		
-		this.categorias.put(id, categoria);
+		categorias.save(categoria);
 	}
 	
 	public Collection<Categoria> findAll() {
-		return categorias.values();
+		return categorias.findAll();
 	}
 	
-	public Categoria findById(long id) {
-		return categorias.get(id);
+	public Optional<Categoria> findById(long id) {
+		return categorias.findById(id);
 	}
 	
 	public void deleteById(long id) {
-		this.categorias.remove(id);
+		this.categorias.deleteById(id);
 	}
 	
 	public Categoria buscarPorNombre(String nombre) {	
-		for(Categoria categoria : categorias.values()) {
+		for(Categoria categoria : categorias.findAll()) {
 			if(categoria.getNombre().equalsIgnoreCase(nombre)) {
 				return categoria;
 			}
