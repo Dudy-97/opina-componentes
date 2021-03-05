@@ -1,7 +1,6 @@
 package es.urjc.dad.practica.service;
 
 import java.util.Collection;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,9 +25,13 @@ public class ProductoService {
 	
 	@PostConstruct
 	public void init() {
-		save(new Producto("RTX 3070", "una buena grafica", 500, categoriaService.buscarPorNombre("tarjetas graficas")));
-		save(new Producto("RTX 3090", "una grafica mas mejor", 1500, categoriaService.buscarPorNombre("tarjetas graficas")));
-		save(new Producto("Ryzen 9", "el proce", 400, categoriaService.buscarPorNombre("procesadores")));
+		save(new Producto("RTX 3070", "una buena grafica", 500, categoriaService.findByNombre("Tarjetas graficas")));
+		save(new Producto("RTX 3090", "una grafica mas mejor", 1500, categoriaService.findByNombre("Tarjetas graficas")));
+		save(new Producto("Ryzen 9", "el proce", 400, categoriaService.findByNombre("Procesadores")));
+		save(new Producto("Ryzen 9", "el procesador mais potente", 400, categoriaService.findByNombre("Procesadores")));
+        save(new Producto("Intel 10900K", "el mejor procesador gaming ", 459, categoriaService.findByNombre("Procesadores")));
+        save(new Producto("MSI z390", "una placa bien chida", 121200, categoriaService.findByNombre("Placas base")));
+        save(new Producto("Asus Rouge B450", "Placa base gaminmg barata", 40120, categoriaService.findByNombre("Placas base")));
 	}
 	
 	public void save(Producto producto) {
@@ -39,15 +42,8 @@ public class ProductoService {
 		return productos.findAll();
 	}
 	
-	public List<Producto> findAllByCategoria(String categoria) {
-		List<Producto> aux = new ArrayList<>();
-		for(Producto producto : productos.findAll()) {
-			if(producto.getCategoria().getNombre().equalsIgnoreCase(categoria)) {
-				aux.add(producto);
-			}
-		}
-		
-		return aux;
+	public List<Producto> findByCategoriaNombre(String categoria) {
+		return productos.findByCategoriaNombre(categoria);
 	}
 	
 	public Optional<Producto> findById(long id) {
@@ -58,13 +54,8 @@ public class ProductoService {
 		this.productos.deleteById(id);
 	}
 	
-	public Producto buscarPorNombre(String nombre) {
-		for(Producto producto : productos.findAll()) {
-			if(producto.getNombre().equalsIgnoreCase(nombre)) {
-				return producto;
-			}
-		}
-		return null;
+	public Producto findByNombre(String nombre) {
+		return productos.findByNombre(nombre);
 	}
 }
 

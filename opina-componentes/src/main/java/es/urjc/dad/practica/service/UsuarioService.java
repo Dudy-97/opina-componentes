@@ -43,12 +43,7 @@ public class UsuarioService {
 	}
 	
 	public Usuario buscarPorNombre(String nombre) {
-		for(Usuario usuario : usuarios.findAll()) {
-			if(usuario.getNombre().equalsIgnoreCase(nombre)) {
-				return usuario;
-			}
-		}
-		return null;
+		return usuarios.findByNombre(nombre);
 	}
 }
 

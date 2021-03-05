@@ -6,4 +6,5 @@ import es.urjc.dad.practica.model.Categoria;
 
 public interface CategoriaRepository extends JpaRepository<Categoria, Long> {
 
+	Categoria findByNombre(String nombre);
 }

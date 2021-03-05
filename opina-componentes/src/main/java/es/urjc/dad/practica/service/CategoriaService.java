@@ -42,12 +42,7 @@ public class CategoriaService {
 		this.categorias.deleteById(id);
 	}
 	
-	public Categoria buscarPorNombre(String nombre) {	
-		for(Categoria categoria : categorias.findAll()) {
-			if(categoria.getNombre().equalsIgnoreCase(nombre)) {
-				return categoria;
-			}
-		}
-		return null;
+	public Categoria findByNombre(String nombre) {	
+		return categorias.findByNombre(nombre);
 	}
 }
