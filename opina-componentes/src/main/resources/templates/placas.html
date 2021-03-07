@@ -1,9 +1,9 @@
 {{>header}}
 
-       <p> Esta es la pagina de las placas</p>
+        <p> Esta es la pagina de las placas</p>
 
-       {{#placas}}
-           <a href="/placas/{{-index}}">{{nombre}} {{precio}}</a>
+        {{#placas}}
+           <a href="/placas/{{id}}">{{nombre}} {{precio}}</a>
             <br>
         {{/placas}}
 
@@ -11,8 +11,9 @@
         {{^placas}}
             <p>No hay placas </p>
         {{/placas}}
-
-
+		<br>
+		<a href="/placas/nueva">Añadir nueva placa base</a>  
+		<br>
        <a href="/">Pagina principal</a>
     </body>
 </html>

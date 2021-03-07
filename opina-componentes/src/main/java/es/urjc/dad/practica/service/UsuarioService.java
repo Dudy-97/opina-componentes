@@ -42,7 +42,7 @@ public class UsuarioService {
 		this.usuarios.deleteById(id);
 	}
 	
-	public Usuario buscarPorNombre(String nombre) {
+	public Usuario findByNombre(String nombre) {
 		return usuarios.findByNombre(nombre);
 	}
 }

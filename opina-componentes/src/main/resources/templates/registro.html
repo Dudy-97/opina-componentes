@@ -1,12 +1,16 @@
 {{>header}}
 
-       <p> Te has registrado!!! </p>
-       <p> Yupi</p>
-         <br>
-
-        <a href="/usuario">Mi usuario</a>
-        <a href="/">Pagina principal</a>
-<!--           <a href="/">Aceptar</a> -->
-<!--           <a href="/">Volver</a> -->
+		<p>Rellene los campos para registrase:</p>
+		<form action="/registro" method="post">
+			<p>Correo electronico: </p>
+			<input type='text' name='email'>
+			<p>Nombre de usuario (lo podrán ver otros usuarios):</p>
+			<input type='text' name='nombre'>
+			<p>Contraseña:</p>
+			<input type='password' name='pass'>
+			<br>
+			<input type='submit' value='Registrarse'>
+		</form>
+		<a href="/">Cancelar</a>
     </body>
 </html>

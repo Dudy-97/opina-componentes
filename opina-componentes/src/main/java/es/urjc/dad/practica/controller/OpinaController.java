@@ -1,5 +1,6 @@
 package es.urjc.dad.practica.controller;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,15 +29,9 @@ public class OpinaController {
 	@Autowired
 	private ValoracionService valoracionService;
 	
-	@GetMapping("/login")
-	public String login(Model model) {
-		
-		return "login";
-	}
-	
 	@GetMapping("/procesadores")
 	public String procesadores(Model model) {
-		List<Producto> procesadores = productoService.findByCategoriaNombre("Procesadores");
+		List<Producto> procesadores = productoService.findByCategoriaNombre("Procesador");
 		
 		model.addAttribute("procesadores", procesadores);
 		
@@ -45,7 +40,7 @@ public class OpinaController {
 	
 	@GetMapping("/graficas")
 	public String graficas(Model model) {
-		List<Producto> graficas = productoService.findByCategoriaNombre("Tarjetas graficas");
+		List<Producto> graficas = productoService.findByCategoriaNombre("Tarjeta grafica");
 		
 		model.addAttribute("graficas", graficas);
 		
@@ -54,6 +49,9 @@ public class OpinaController {
 	
 	@GetMapping("/placas")
 	public String placas(Model model) {
+		List<Producto> placas = productoService.findByCategoriaNombre("Placa base");
+		
+		model.addAttribute("placas", placas);
 		
 		return "placas";
 	}
@@ -73,13 +71,18 @@ public class OpinaController {
         Producto procesador = productoService.findById(procesadorId).orElseThrow();
         
         model.addAttribute("producto", procesador);
+        model.addAttribute("valoraciones", procesador.getlValoraciones());
         
 		return "producto";
     }
 
     @GetMapping("/placas/{placaId}") 
     public String mostrarPlacas(Model model, @PathVariable int placaId) {
-
+    	Producto placa = productoService.findById(placaId).orElseThrow();
+    	
+    	model.addAttribute("producto", placa);
+    	model.addAttribute("valoraciones", placa.getlValoraciones());
+    	
         return "producto";
     }
     
@@ -95,32 +98,102 @@ public class OpinaController {
     	return "nueva_valoracion";
     }
     
-    @GetMapping("/usuario")
-    public String mostrar_usuario(Model model, @RequestParam String user) {
-
-        Usuario usuario = usuarioService.buscarPorNombre(user);
-        model.addAttribute(usuario);
-
-        return "usuario";
+    @GetMapping("/graficas/nueva")
+    public String nuevaGrafica(Model model) {
+    	
+    	return "nueva_grafica";
     }
     
-//  @PostMapping("/usuario") 
-//  public String save(Model model, @RequestParam String user, @RequestParam String pass) {
-//
-//
-//      model.addAttribute("nombre", user);
-//      model.addAttribute("pass", pass);
-//
-//      return "usuario";
-//  }
+    @PostMapping("/graficas/nueva")
+    public String nuevaGrafica(Model model, Producto producto) {
+    	producto.setCategoria(categoriaService.findByNombre("Tarjeta grafica")); 	
+    	productoService.save(producto);
+    	
+    	return "guardado";
+    }
     
-    @GetMapping("/registro")//login save
-    public String nuevoUsuario(Model model, Usuario user) {
-
-        usuarioService.save(user);
-
+    @GetMapping("/procesadores/nuevo")
+    public String nuevoProcesador(Model model) {
+    	return "nuevo_procesador";
+    }
+    
+    @PostMapping("/procesadores/nuevo")
+    public String nuevoProcesador(Model model, Producto producto) {
+    	producto.setCategoria(categoriaService.findByNombre("Procesador")); 	
+    	productoService.save(producto);
+    	
+    	return "guardado";
+    }
+    
+    @GetMapping("/placas/nueva")
+    public String nuevaPlaca(Model model) {
+    	return "nueva_placa";
+    }
+    
+    @PostMapping("/placas/nueva")
+    public String nuevaPlaca(Model model, Producto producto) {
+    	producto.setCategoria(categoriaService.findByNombre("Placa base")); 	
+    	productoService.save(producto);
+    	
+    	return "guardado";
+    }
+    
+    @GetMapping("/{id}/eliminar")
+    public String eliminarProducto(Model model, @PathVariable long id) {
+    	productoService.deleteById(id);
+    	
+    	return "eliminado";
+    }
+    
+    @GetMapping("/ver_usuarios")
+    public String verUsuarios(Model model) {
+    	Collection<Usuario> usuarios = usuarioService.findAll();
+    	
+    	model.addAttribute("usuarios", usuarios);
+    	
+    	return "ver_usuarios";
+    }
+    
+    @GetMapping("ver_usuarios/{id}")
+    public String verUsuario(Model model, @PathVariable long id) {
+    	Usuario usuario = usuarioService.findById(id).orElseThrow();
+    	
+    	model.addAttribute("usuario", usuario);
+    	model.addAttribute("numValoraciones", usuario.getlValoraciones().size());
+    	model.addAttribute("valoraciones", usuario.getlValoraciones());
+    	
+    	return "usuario";
+    }
+    
+    @GetMapping("/ver_usuarios/{id}/eliminar")
+    public String eliminarUsuario(Model model, @PathVariable long id) {
+    	usuarioService.deleteById(id);
+    	
+    	return "eliminado";
+    }
+    
+    @GetMapping("/registro")
+    public String nuevoUsuario(Model model) {
         return "registro";
     }
+    
+    @PostMapping("/registro")
+    public String nuevoUsuario(Model model, Usuario usuario) {
+    	usuarioService.save(usuario);
+    	
+    	return "guardado";
+    }
+    
+	@GetMapping("/login")
+	public String login(Model model) {
+		
+		return "login";
+	}
+	
+	@PostMapping("/login")
+	public String login(Model model, Usuario usuario) {
+		return "index";
+	}
 }
 
 

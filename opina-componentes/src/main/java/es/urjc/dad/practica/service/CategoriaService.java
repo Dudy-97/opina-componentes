@@ -21,9 +21,9 @@ public class CategoriaService {
 	
 	@PostConstruct
 	public void init() {
-		save(new Categoria("Tarjetas graficas"));
-		save(new Categoria("Procesadores"));
-		save(new Categoria("Placas base"));
+		save(new Categoria("Tarjeta grafica"));
+		save(new Categoria("Procesador"));
+		save(new Categoria("Placa base"));
 	}
 	
 	public void save(Categoria categoria) {

@@ -1,20 +1,21 @@
 {{>header}}
 
-       <p> Esta es la pagina de usuario </p><br>
-          <p> Nombre: {{usuario.nombre}}</p>
-          <p> Email: {{usuario.email}}</p>
 
-
-          <p> Mis valoraciones: </p>
-             <hr/>
-            {{#valoraciones}}
-            <p>Nombre: {{usuario.nombre}}</p>
+		<p>Nombre: {{usuario.nombre}}</p>
+     	<p>Email: {{usuario.email}}</p>
+		<br>
+		<a href="/ver_usuarios/{{id}}/eliminar">Eliminar usuario</a>
+		<br>
+		<p>Ha escrito {{numValoraciones}} valoraciones: </p>
+        <hr>
+        {{#valoraciones}}
+        	<p>Producto: {{producto.nombre}}</p>
             <p>Nota: {{nota}}</p>
-            <p>{{texto}}</p>
+            <p>Texto: {{texto}}</p>
             <br><hr>
-             {{/valoraciones}}
+       	{{/valoraciones}}
 
 
-           <a href="/">Pagina principal</a>
+   		<a href="/">Pagina principal</a>
     </body> 
 </html>

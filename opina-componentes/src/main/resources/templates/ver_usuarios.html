@@ -1,0 +1,15 @@
+{{>header}}
+
+		<p>Usuarios registrados:</p>
+		{{#usuarios}}
+			<a href="/ver_usuarios/{{id}}">{{nombre}}</a>
+			<br>
+		{{/usuarios}}
+		
+		{{^usuarios}}
+			<p>No hay usuarios registrados</p>
+		{{/usuarios}}
+		<br>
+		<a href="/">Pagina principal</a>
+	</body>
+</html>

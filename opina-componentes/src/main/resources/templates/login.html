@@ -1,25 +1,14 @@
 {{>header}}
 
-       <p> Esta es el login page </p>
-
-            <form>
-                <p>Email: </p>
-                <input type="text" name='email'> <br>
-
-                <p>Nombre: </p>
-                <input type="text" name='user'> <br>
-
-                <p>Pass: </p>
-                <input type="text" name='pass'> <br>
-
-				
-
-               <a href="/usuario"> Login </a> <br>
-               <a href="/registro">Registrarse</a>
-               
-
+		<p>Introduzca sus datos para iniciar sesion:</p>
+		<form action="/login" method="post">
+		 	<p>Nombre de usuario: <input type='text' name='nombre'></p>
+			<p>Contraseña: <input type='password' name='pass'></p>
+			
+			<input type='submit' value='Iniciar sesion'>
         </form>
-    </body> 
-
-    <a href="/">Pagina principal</a>
+        <a href="/registro">¿No tienes cuenta? Registrate</a>
+        <br>
+        <a href="/">Pagina principal</a>
+   	</body> 
 </html>
