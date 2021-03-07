@@ -3,13 +3,15 @@ package es.urjc.dad.practica.controller;
 import java.util.Collection;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+//import org.springframework.web.bind.annotation.RequestParam;
 
 import es.urjc.dad.practica.model.*;
 import es.urjc.dad.practica.service.*;
@@ -28,6 +30,14 @@ public class OpinaController {
 	
 	@Autowired
 	private ValoracionService valoracionService;
+	
+	@Autowired
+	private UserSession userSession;
+	
+	@GetMapping("/")
+	public String showPost(Model model, HttpSession session) {
+		return "index";
+	}
 	
 	@GetMapping("/procesadores")
 	public String procesadores(Model model) {
@@ -87,15 +97,27 @@ public class OpinaController {
     }
     
     @GetMapping("/{categoriaId}/{productoId}/nueva_valoracion")
-    public String nuevaValoracionForm(Model model) {
+    public String nuevaValoracionForm(Model model, @PathVariable long categoriaId, @PathVariable long productoId) {
+    	
+    	
     	return "nueva_valoracion";
     }
     
     @PostMapping("/{categoriaId}/{productoId}/nueva_valoracion")
     public String nuevaValoracion(Model model, Valoracion valoracion, @PathVariable long categoriaId, @PathVariable long productoId) {
+    	valoracion.setUsuario(userSession.getUsuario());
+    	valoracion.setProducto(productoService.findById(productoId).orElseThrow());
+    	
     	valoracionService.save(valoracion);
     	
-    	return "nueva_valoracion";
+    	return "guardado";
+    }
+    
+    @GetMapping("/valoracion/{id}/eliminar")
+    public String eliminarValoracion(Model model, @PathVariable long id) {
+    	valoracionService.deleteById(id);
+    	
+    	return "eliminado";
     }
     
     @GetMapping("/graficas/nueva")
@@ -192,7 +214,17 @@ public class OpinaController {
 	
 	@PostMapping("/login")
 	public String login(Model model, Usuario usuario) {
-		return "index";
+		Usuario auxUsuario = usuarioService.findByNombre(usuario.getNombre());
+		
+		if(auxUsuario != null && auxUsuario.getPass().equals(usuario.getPass()))
+		{
+			userSession.setUsuario(auxUsuario);
+			return "index";
+		}
+		
+		model.addAttribute("incorrectos", true);
+		
+		return "login";
 	}
 }
 
