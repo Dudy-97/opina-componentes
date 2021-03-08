@@ -157,11 +157,11 @@ Descripcion: En esta imagen se muestra el menu de login por el que se puede acce
 
 # Modelo de datos
 
-  ##Diagrama de clases UML
+  ## Diagrama de clases UML
   
+  ![DiagramaUML](https://user-images.githubusercontent.com/78860255/110377933-48fc4580-8055-11eb-88e1-561eb4af38b5.PNG)
   
-  
-  ##Diagrama Entidad/Relación
+  ## Diagrama Entidad/Relación
  
   ![DiagramaER](https://user-images.githubusercontent.com/60407168/110366001-0717d300-8046-11eb-8862-33cb92f5f346.png)
 
