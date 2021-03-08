@@ -27,10 +27,10 @@ public class ValoracionService {
 	
 	@PostConstruct
 	public void init() {
-		save(new Valoracion(usuarioService.findByNombre("angel"), productoService.findByNombre("RTX 3070"),
+		/*save(new Valoracion(usuarioService.findByNombre("angel"), productoService.findByNombre("RTX 3070"),
 				85, "Ta wapa"));
 		save(new Valoracion(usuarioService.findByNombre("victor"), productoService.findByNombre("RTX 3070"),
-				90, "PC master race"));
+				90, "PC master race"));*/
 	}
 	
 	public void save(Valoracion valoracion) {

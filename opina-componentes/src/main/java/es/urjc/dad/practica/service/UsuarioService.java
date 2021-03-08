@@ -22,8 +22,8 @@ public class UsuarioService {
 	
 	@PostConstruct
 	public void init() {
-		save(new Usuario("angel", "angel", "1234"));
-		save(new Usuario("victor", "victor", "1234"));
+		/*save(new Usuario("angel", "angel", "1234"));
+		save(new Usuario("victor", "victor", "1234"));*/
 	}
 	
 	public void save(Usuario usuario) {
