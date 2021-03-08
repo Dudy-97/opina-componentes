@@ -119,7 +119,7 @@ La administración de los productos de la aplicación web como dar de alta nuevo
 
   Descripcion: Pagina que verifica que un producto se ha guardado correctamente.
   
-  
+
   
   ## producto.html
  
@@ -133,13 +133,37 @@ La administración de los productos de la aplicación web como dar de alta nuevo
   
   
 # Diagrama de Navegacion
+   ### index.html
+![image](https://user-images.githubusercontent.com/60407168/110368579-865ad600-8049-11eb-9eae-c6a061313421.png)
+ Descripcion: En esta imagen se puede observar como del menu principal se puede acceder:
+    -> 1 Al menu de inicio de sesión 
+    -> 2 A la pagina para ver los usuarios registrados
+    -> 3 A cada pagina de una categoria, donde se pueden ver los productos que tiene dentro
+
+ 
+  ### ver_usuarios
+ ![image](https://user-images.githubusercontent.com/60407168/110369777-26652f00-804b-11eb-95d5-eb7c25b49ccf.png)
+ Descripcion: En el menu de usuarios, podemos acceder a cada usuario en especifico (1) y ver las valoraciones que éste ha publicado en cada producto (2). 
+ 
+ 
+   ### procesadores.html
+ ![image](https://user-images.githubusercontent.com/60407168/110371457-4e559200-804d-11eb-9fbf-2e9b4a647722.png)
+Descripcion: Desde la pagina de la categoria procesadores, encontramos todos los procesadores y al elegir uno nos muestra su descripcion, precio y valoraciones (3), aqui tambien podemos añadir valoraciones y eleminirlas, asi como eliminar el producto (Nos muestra una pantalla confirmando la eliminiacion, 4). Ademas, podemos añadir productos (1) y nos aparece una ventana afirmando el exito en la operacion (2).
 
 
+  ### Login.html
+ ![image](https://user-images.githubusercontent.com/60407168/110372406-8dd0ae00-804e-11eb-905f-df1331375bf9.png)
+Descripcion: En esta imagen se muestra el menu de login por el que se puede acceder al usuario, en cuanto se rellenan los datos y se presiona el boton de "Iniciar sesion" se accede a la transparencia (1). Por otro lado, si no se posee un usuario se puede crear uno en "Registrarse", el cual nos lleva al menu de registro (2) y cuando se rellena correctamente y presionamos "Registrarse" nos aparece una pagina confirmando el guardado.
 
 # Modelo de datos
 
- (de la aplicación utilizando un diagrama de clases UML y un diagrama
-Entidad/Relación que muestre cómo se persisten dichos datos en la base de datos relacional.)
+  ##Diagrama de clases UML
+  
+  
+  
+  ##Diagrama Entidad/Relación
+ 
+  ![DiagramaER](https://user-images.githubusercontent.com/60407168/110366001-0717d300-8046-11eb-8862-33cb92f5f346.png)
 
 
 
