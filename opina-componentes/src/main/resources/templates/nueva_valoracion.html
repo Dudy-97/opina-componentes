@@ -4,7 +4,10 @@
 			<p>Nota(0-100): <input type='number' name='nota' min='0' step='1' max='100'></p>
 			<p>Texto:</p>
 			<textarea name='texto' rows="5" cols="40"></textarea>
-			<input type='submit' value='Aceptar'>
+		    {{#nousuario}}
+		        <p style="color:red">Para escribir una reseña, necesita un usuario</p>
+		    {{/nousuario}}
+			  <input type='submit' value='Aceptar'>
 		</form>
 	</body>
 </html>

@@ -39,6 +39,21 @@ public class OpinaController {
 		return "index";
 	}
 	
+	@GetMapping("/")
+	public String menuPrincipal(Model model, HttpSession session) {
+		
+		Usuario usuario_guardado = userSession.getUsuario();
+		
+    	if(usuario_guardado != null  ) {
+    		
+    		model.addAttribute("tiene_usuario", true);
+    		return "index";
+    	}
+		model.addAttribute("tiene_usuario", false);
+		
+		return "index";
+	}
+	
 	@GetMapping("/procesadores")
 	public String procesadores(Model model) {
 		List<Producto> procesadores = productoService.findByCategoriaNombre("Procesador");
@@ -96,23 +111,31 @@ public class OpinaController {
         return "producto";
     }
     
-    @GetMapping("/{categoriaId}/{productoId}/nueva_valoracion")
-    public String nuevaValoracionForm(Model model, @PathVariable long categoriaId, @PathVariable long productoId) {
-    	
-    	
-    	return "nueva_valoracion";
-    }
+	 @GetMapping("/{categoriaId}/{productoId}/nueva_valoracion") public String nuevaValoracionForm(Model model, @PathVariable long categoriaId, @PathVariable long productoId) {
+	 
+	  return "nueva_valoracion"; 
+	}
     
+
     @PostMapping("/{categoriaId}/{productoId}/nueva_valoracion")
     public String nuevaValoracion(Model model, Valoracion valoracion, @PathVariable long categoriaId, @PathVariable long productoId) {
-    	valoracion.setUsuario(userSession.getUsuario());
-    	valoracion.setProducto(productoService.findById(productoId).orElseThrow());
     	
-    	valoracionService.save(valoracion);
+    	Usuario usuario_guardado = userSession.getUsuario();
     	
-    	return "guardado";
+    	if(usuario_guardado != null) {
+    		valoracion.setUsuario(usuario_guardado);
+    		valoracion.setProducto(productoService.findById(productoId).orElseThrow());
+    	
+    		valoracionService.save(valoracion);
+    	
+    		return "guardado";
+    	}
+    	model.addAttribute("nousuario", true);
+    	
+    	return "nueva_valoracion";
+    	
     }
-    
+   
     @GetMapping("/valoracion/{id}/eliminar")
     public String eliminarValoracion(Model model, @PathVariable long id) {
     	valoracionService.deleteById(id);

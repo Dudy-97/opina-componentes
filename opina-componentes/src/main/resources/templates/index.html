@@ -2,13 +2,19 @@
 
         <p>Bienvenido a OpinaComponentes</p>
         <br>
-        <a href="/login">Iniciar sesion</a>
+        {{#tiene_usuario}}
+        <p>Has iniciado sesion como: {{usuario.nombre}}</p>
+        <a href="/ver_usuarios/{{id}}">Ver mi Usuario</a>
+        {{/tiene_usuario}}
+        <p>No has iniciado sesion</p>
+        <a href="/login">Iniciar sesion</a><br>
         <p> Categorias:  </p>
         <a href="/procesadores">Procesadores</a>
         <br>
         <a href="/graficas">Tarjetas graficas</a>
         <br>
         <a href="/placas">Placas base</a>
+        <br><br>
         <p>Acciones de gestión:</p>
         <a href="/ver_usuarios">Usuarios registrados</a>
     </body>
