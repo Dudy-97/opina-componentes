@@ -11,6 +11,10 @@ public class UserSession {
 
 	private Usuario usuario;
 	
+	public UserSession() {
+		usuario = null;
+	}
+	
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}

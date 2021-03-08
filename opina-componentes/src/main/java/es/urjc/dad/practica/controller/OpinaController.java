@@ -35,22 +35,23 @@ public class OpinaController {
 	private UserSession userSession;
 	
 	@GetMapping("/")
-	public String showPost(Model model, HttpSession session) {
+	public String menuPrincipal(Model model) {
+		
+		Usuario usuario = userSession.getUsuario();
+		
+    	if(usuario != null  ) {
+    		model.addAttribute("sesion_iniciada", true);
+    		model.addAttribute("usuario", usuario);
+    	} else {
+    		model.addAttribute("sesion_iniciada", false);
+    	}
 		return "index";
 	}
 	
-	@GetMapping("/")
-	public String menuPrincipal(Model model, HttpSession session) {
-		
-		Usuario usuario_guardado = userSession.getUsuario();
-		
-    	if(usuario_guardado != null  ) {
-    		
-    		model.addAttribute("tiene_usuario", true);
-    		return "index";
-    	}
-		model.addAttribute("tiene_usuario", false);
-		
+	@GetMapping("/cerrar_sesion")
+	public String cerrarSesion(Model model) {
+		userSession.setUsuario(null);
+		model.addAttribute("sesion_iniciada", false);
 		return "index";
 	}
 	
@@ -111,29 +112,28 @@ public class OpinaController {
         return "producto";
     }
     
-	 @GetMapping("/{categoriaId}/{productoId}/nueva_valoracion") public String nuevaValoracionForm(Model model, @PathVariable long categoriaId, @PathVariable long productoId) {
+	 @GetMapping("/{categoriaId}/{productoId}/nueva_valoracion") 
+	 public String nuevaValoracionForm(Model model, @PathVariable long categoriaId, @PathVariable long productoId) {
 	 
-	  return "nueva_valoracion"; 
+		 if(userSession.getUsuario() == null) {
+			 return "login";
+		 }
+		 
+		 return "nueva_valoracion"; 
 	}
     
 
     @PostMapping("/{categoriaId}/{productoId}/nueva_valoracion")
     public String nuevaValoracion(Model model, Valoracion valoracion, @PathVariable long categoriaId, @PathVariable long productoId) {
     	
-    	Usuario usuario_guardado = userSession.getUsuario();
+    	Usuario usuario = userSession.getUsuario();
     	
-    	if(usuario_guardado != null) {
-    		valoracion.setUsuario(usuario_guardado);
-    		valoracion.setProducto(productoService.findById(productoId).orElseThrow());
+    	valoracion.setUsuario(usuario);
+    	valoracion.setProducto(productoService.findById(productoId).orElseThrow());
     	
-    		valoracionService.save(valoracion);
+    	valoracionService.save(valoracion);
     	
-    		return "guardado";
-    	}
-    	model.addAttribute("nousuario", true);
-    	
-    	return "nueva_valoracion";
-    	
+    	return "guardado";
     }
    
     @GetMapping("/valoracion/{id}/eliminar")
@@ -151,6 +151,11 @@ public class OpinaController {
     
     @PostMapping("/graficas/nueva")
     public String nuevaGrafica(Model model, Producto producto) {
+    	if(productoService.yaExiste(producto)) {
+    		model.addAttribute("yaExiste", true);
+    		return "nueva_grafica";
+    	}
+    	
     	producto.setCategoria(categoriaService.findByNombre("Tarjeta grafica")); 	
     	productoService.save(producto);
     	
@@ -164,6 +169,11 @@ public class OpinaController {
     
     @PostMapping("/procesadores/nuevo")
     public String nuevoProcesador(Model model, Producto producto) {
+    	if(productoService.yaExiste(producto)) {
+    		model.addAttribute("yaExiste", true);
+    		return "nuevo_procesador";
+    	}
+    	
     	producto.setCategoria(categoriaService.findByNombre("Procesador")); 	
     	productoService.save(producto);
     	
@@ -177,6 +187,11 @@ public class OpinaController {
     
     @PostMapping("/placas/nueva")
     public String nuevaPlaca(Model model, Producto producto) {
+    	if(productoService.yaExiste(producto)) {
+    		model.addAttribute("yaExiste", true);
+    		return "nueva_placa";
+    	}
+    	
     	producto.setCategoria(categoriaService.findByNombre("Placa base")); 	
     	productoService.save(producto);
     	
@@ -224,7 +239,20 @@ public class OpinaController {
     
     @PostMapping("/registro")
     public String nuevoUsuario(Model model, Usuario usuario) {
+    	
+    	if(usuario.getEmail()==null || usuario.getNombre()==null || usuario.getPass()==null) {
+    		model.addAttribute("faltan_campos", true);
+    		return "registro";
+    	} else if(usuarioService.yaExiste(usuario)) {
+    		model.addAttribute("yaExiste", true);
+    		return "registro";
+    	}
+    	
     	usuarioService.save(usuario);
+    	
+    	userSession.setUsuario(usuario);
+    	
+    	model.addAttribute("sesion_iniciada", true);
     	
     	return "guardado";
     }
@@ -242,6 +270,7 @@ public class OpinaController {
 		if(auxUsuario != null && auxUsuario.getPass().equals(usuario.getPass()))
 		{
 			userSession.setUsuario(auxUsuario);
+			model.addAttribute("sesion_iniciada", true);
 			return "index";
 		}
 		

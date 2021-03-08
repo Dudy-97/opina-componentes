@@ -45,6 +45,17 @@ public class UsuarioService {
 	public Usuario findByNombre(String nombre) {
 		return usuarios.findByNombre(nombre);
 	}
+	
+	public Usuario findByEmail(String email) {
+		return usuarios.findByEmail(email);
+	}
+	
+	public Boolean yaExiste(Usuario usuario) {
+		if(usuarios.findByEmail(usuario.getEmail()) != null || usuarios.findByNombre(usuario.getNombre()) != null) {
+			return true;
+		}
+		return false;
+	}
 }
 
 

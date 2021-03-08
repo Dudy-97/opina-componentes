@@ -56,6 +56,13 @@ public class ProductoService {
 	public Producto findByNombre(String nombre) {
 		return productos.findByNombre(nombre);
 	}
+	
+	public Boolean yaExiste(Producto producto) {
+		if(productos.findByNombre(producto.getNombre()) != null) {
+			return true;
+		}
+		return false;
+	}
 }
 
 

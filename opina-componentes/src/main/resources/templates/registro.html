@@ -9,6 +9,14 @@
 			<p>Contraseña:</p>
 			<input type='password' name='pass'>
 			<br>
+			{{#faltan_campos}}
+				<p style="color:red">Rellene todos los campos</p>
+			{{/faltan_campos}}
+			
+			{{#yaExiste}}
+				<p style="color:red">El usuario ya existe</p>
+			{{/yaExiste}}
+			<br>
 			<input type='submit' value='Registrarse'>
 		</form>
 		<a href="/">Cancelar</a>

@@ -5,7 +5,9 @@
 			<p>Precio: <input type='number' name='precio'></p>
 			<p>Descripcion:</p>
 			<textarea name='descripcion' rows="5" cols="40"></textarea>
-			
+			{{#yaExiste}}
+				<p style="color:red">El producto ya existe</p>
+			{{/yaExiste}}
 			<input type='submit' value='Añadir'>
 		</form>
 		<a href="/">Página principal</a>
