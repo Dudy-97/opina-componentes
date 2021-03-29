@@ -24,6 +24,7 @@ public class UsuarioController {
 	private UserSession userSession;
 	
 	
+	
 	@GetMapping("/cerrar_sesion")
 	public String cerrarSesion(Model model) {
 		userSession.setUsuario(null);
