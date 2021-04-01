@@ -1,6 +1,7 @@
 package es.urjc.dad.practica.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -58,14 +59,15 @@ public class ProductoController {
     		return "nuevo_procesador";
     	}
     	
-    	producto.setCategoria(categoriaService.findByNombre("Procesador")); 	
-    	productoService.save(producto);
-    	
-    	return "guardado";
+    	Optional<Categoria> categoria = categoriaService.findByNombre("Procesador");
+    	if (categoria.isPresent()) {
+    		producto.setCategoria(categoria.get()); 	
+    		productoService.save(producto);
+    		return "guardado";
+    	} else {
+    		return "procesadores";
+    	}
     }
-	
-	
-	
 	
 	
 	//Metodos graficas
@@ -101,10 +103,15 @@ public class ProductoController {
     		return "nueva_grafica";
     	}
     	
-    	producto.setCategoria(categoriaService.findByNombre("Tarjeta grafica")); 	
-    	productoService.save(producto);
+    	Optional<Categoria> categoria =  categoriaService.findByNombre("Tarjeta grafica");
+    	if(categoria.isPresent()) {
+    		producto.setCategoria(categoria.get()); 	
+    		productoService.save(producto);
+    		return "guardado";
+    	} else {
+    		return "graficas";
+    	}
     	
-    	return "guardado";
     }
 	
 	
@@ -137,15 +144,19 @@ public class ProductoController {
 	    
 	@PostMapping("/placas/nueva")
 	public String nuevaPlaca(Model model, Producto producto) {
-	   if(productoService.yaExiste(producto)) {
+		if(productoService.yaExiste(producto)) {
 	    	model.addAttribute("yaExiste", true);
 	    	return "nueva_placa";
 	    }
 	    	
-	    producto.setCategoria(categoriaService.findByNombre("Placa base")); 	
-	    productoService.save(producto);
-	    	
-	    return "guardado";
+	   	Optional<Categoria> categoria = categoriaService.findByNombre("Placa base");
+	   	if(categoria.isPresent()) {
+	   		producto.setCategoria(categoria.get()); 	
+	   		productoService.save(producto);
+	   		return "guardado";
+	   	} else {
+	   		return "placas";
+	   	}
 	 }
 	
 

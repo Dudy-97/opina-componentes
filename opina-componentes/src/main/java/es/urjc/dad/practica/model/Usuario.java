@@ -5,7 +5,9 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -25,6 +27,9 @@ public class Usuario {
 	private String nombre;
 	
 	private String pass;
+	
+	@ElementCollection(fetch = FetchType.EAGER)
+	private List<String> roles;
 	
 	@OneToMany(mappedBy="usuario", cascade = CascadeType.ALL)
 	private List<Valoracion> lValoraciones; 
@@ -88,6 +93,14 @@ public class Usuario {
 
 	public void setlValoraciones(List<Valoracion> lValoraciones) {
 		this.lValoraciones = lValoraciones;
+	}
+
+	public List<String> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<String> roles) {
+		this.roles = roles;
 	}
 
 	@Override

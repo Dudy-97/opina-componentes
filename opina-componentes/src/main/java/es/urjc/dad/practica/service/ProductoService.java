@@ -53,7 +53,7 @@ public class ProductoService {
 		this.productos.deleteById(id);
 	}
 	
-	public Producto findByNombre(String nombre) {
+	public Optional<Producto> findByNombre(String nombre) {
 		return productos.findByNombre(nombre);
 	}
 	

@@ -1,6 +1,8 @@
 package es.urjc.dad.practica.controller;
 
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -45,16 +47,7 @@ public class OpinaController {
 	
 	@PostMapping("/login")
 	public String login(Model model, Usuario usuario) {
-		Usuario auxUsuario = usuarioService.findByNombre(usuario.getNombre());
 		
-		if(auxUsuario != null && auxUsuario.getPass().equals(usuario.getPass()))
-		{
-			userSession.setUsuario(auxUsuario);
-			model.addAttribute("sesion_iniciada", true);
-			return "index";
-		}
-		
-		model.addAttribute("incorrectos", true);
 		
 		return "login";
 	}

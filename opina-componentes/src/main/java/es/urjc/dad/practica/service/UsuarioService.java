@@ -42,11 +42,11 @@ public class UsuarioService {
 		this.usuarios.deleteById(id);
 	}
 	
-	public Usuario findByNombre(String nombre) {
+	public Optional<Usuario> findByNombre(String nombre) {
 		return usuarios.findByNombre(nombre);
 	}
 	
-	public Usuario findByEmail(String email) {
+	public Optional<Usuario> findByEmail(String email) {
 		return usuarios.findByEmail(email);
 	}
 	

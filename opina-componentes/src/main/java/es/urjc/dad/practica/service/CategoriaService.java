@@ -42,7 +42,7 @@ public class CategoriaService {
 		this.categorias.deleteById(id);
 	}
 	
-	public Categoria findByNombre(String nombre) {	
+	public Optional<Categoria> findByNombre(String nombre) {	
 		return categorias.findByNombre(nombre);
 	}
 }
