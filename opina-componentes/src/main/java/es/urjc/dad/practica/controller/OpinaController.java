@@ -41,15 +41,17 @@ public class OpinaController {
     
 	@GetMapping("/login")
 	public String login(Model model) {
-		
 		return "login";
 	}
 	
-	@PostMapping("/login")
-	public String login(Model model, Usuario usuario) {
-		
-		
+	/*@PostMapping("/login")
+	public String login(Model model, Usuario usuario) {	
 		return "login";
+	}*/
+	
+	@GetMapping("/loginerror")
+	public String loginerror() {
+		return "loginerror";
 	}
 }
 

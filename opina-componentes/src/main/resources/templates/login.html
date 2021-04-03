@@ -4,9 +4,6 @@
 		<form action="/login" method="post">
 		 	<p>Nombre de usuario: <input type='text' name='nombre'></p>
 			<p>Contraseña: <input type='password' name='pass'></p>
-			{{#incorrectos}}
-				<p style="color:red">Datos incorrectos</p>
-			{{/incorrectos}}
 			<input type='submit' value='Iniciar sesion'>
         </form>
         <a href="/registro">¿No tienes cuenta? Registrate</a>
