@@ -1,5 +1,6 @@
 package es.urjc.dad.practica.controller;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,6 +24,9 @@ public class ProductoController {
 	
 	@Autowired
 	private ProductoService productoService;
+	
+	@Autowired
+	private UsuarioService usuarioService;
 	
 	
 	
@@ -153,6 +157,7 @@ public class ProductoController {
 	   	if(categoria.isPresent()) {
 	   		producto.setCategoria(categoria.get()); 	
 	   		productoService.save(producto);
+	   		sendEmail(producto.getNombre());
 	   		return "guardado";
 	   	} else {
 	   		return "placas";
@@ -167,5 +172,14 @@ public class ProductoController {
     	productoService.deleteById(id);
     	
     	return "eliminado";
+    }
+    
+    private void sendEmail(String nombreProducto) {
+    	Collection<Usuario> usuarios = usuarioService.findAll();
+    	for (Usuario  u : usuarios) {
+    		ProductEmailMessage mensaje = new ProductEmailMessage(u.getEmail(), nombreProducto);
+    		//HAcer post a localhost:9000/sendEmail
+    		// Rest template
+    	}
     }
 }
