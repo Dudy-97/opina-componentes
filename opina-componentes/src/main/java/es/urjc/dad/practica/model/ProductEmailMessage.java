@@ -5,7 +5,6 @@ public class ProductEmailMessage {
 	private String email;
 	private String nombreProducto;
 	
-	
 	public ProductEmailMessage(String email, String nombreProducto) {
 		this.email = email;
 		this.nombreProducto = nombreProducto;

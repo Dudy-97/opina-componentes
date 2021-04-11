@@ -1,6 +1,7 @@
 package es.urjc.dad.practica.model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -12,6 +13,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Entity
 public class Usuario {
@@ -36,12 +39,12 @@ public class Usuario {
 	
 	public Usuario() {}
 	
-	public Usuario(String email, String nombre, String pass) {
+	public Usuario(String email, String nombre, String pass, String... roles) {
 		super();
 		this.email = email;
 		this.nombre = nombre;
-		this.pass = pass;
-		
+		this.pass = new BCryptPasswordEncoder().encode(pass);
+		this.roles = new ArrayList<>(Arrays.asList(roles));
 		lValoraciones = new ArrayList<>();
 	}
 

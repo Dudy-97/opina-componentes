@@ -5,12 +5,15 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 //import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.client.RestTemplate;
 
 import es.urjc.dad.practica.model.*;
 import es.urjc.dad.practica.service.*;
@@ -28,7 +31,8 @@ public class ProductoController {
 	@Autowired
 	private UsuarioService usuarioService;
 	
-	
+	private RestTemplate restTemplate = new RestTemplate();
+	private final String EMAIL_URL = "http://localhost:9000/SendEmail";
 	
 	//Metodos de procesadores
 	
@@ -164,8 +168,6 @@ public class ProductoController {
 	   	}
 	 }
 	
-
-	
 	//Metodo eliminar producto
     @GetMapping("/{id}/eliminar")
     public String eliminarProducto(Model model, @PathVariable long id) {
@@ -178,8 +180,8 @@ public class ProductoController {
     	Collection<Usuario> usuarios = usuarioService.findAll();
     	for (Usuario  u : usuarios) {
     		ProductEmailMessage mensaje = new ProductEmailMessage(u.getEmail(), nombreProducto);
-    		//HAcer post a localhost:9000/sendEmail
-    		// Rest template
+    		HttpEntity<ProductEmailMessage> mensajeBody = new HttpEntity<>(mensaje);
+    		restTemplate.exchange(EMAIL_URL, HttpMethod.POST, mensajeBody, Void.class);
     	}
     }
 }
