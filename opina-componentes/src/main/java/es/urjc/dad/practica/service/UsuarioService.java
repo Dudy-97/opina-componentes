@@ -51,7 +51,7 @@ public class UsuarioService {
 	}
 	
 	public Boolean yaExiste(Usuario usuario) {
-		if(usuarios.findByEmail(usuario.getEmail()) != null || usuarios.findByNombre(usuario.getNombre()) != null) {
+		if(usuarios.findByEmail(usuario.getEmail()).isPresent() || usuarios.findByNombre(usuario.getNombre()).isPresent()) {
 			return true;
 		}
 		return false;

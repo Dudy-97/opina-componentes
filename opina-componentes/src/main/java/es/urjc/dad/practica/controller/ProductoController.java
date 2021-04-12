@@ -55,12 +55,12 @@ public class ProductoController {
 		return "producto";
     }
 	
-	@GetMapping("/procesadores/nuevo")
+	@GetMapping("/nuevoprocesador")
     public String nuevoProcesador(Model model) {
     	return "nuevo_procesador";
     }
     
-    @PostMapping("/procesadores/nuevo")
+    @PostMapping("/nuevoprocesador")
     public String nuevoProcesador(Model model, Producto producto) {
     	if(productoService.yaExiste(producto)) {
     		model.addAttribute("yaExiste", true);
@@ -98,13 +98,13 @@ public class ProductoController {
 		return "producto";
 	}
 	
-    @GetMapping("/graficas/nueva")
+    @GetMapping("/nuevagrafica")
     public String nuevaGrafica(Model model) {
     	
     	return "nueva_grafica";
     }
     
-    @PostMapping("/graficas/nueva")
+    @PostMapping("/nuevagrafica")
     public String nuevaGrafica(Model model, Producto producto) {
     	if(productoService.yaExiste(producto)) {
     		model.addAttribute("yaExiste", true);
@@ -145,12 +145,12 @@ public class ProductoController {
         return "producto";
     }
 	
-	@GetMapping("/placas/nueva")
+	@GetMapping("/nuevaplaca")
 	public String nuevaPlaca(Model model) {
 	    return "nueva_placa";
 	}
 	    
-	@PostMapping("/placas/nueva")
+	@PostMapping("/nuevaplaca")
 	public String nuevaPlaca(Model model, Producto producto) {
 		if(productoService.yaExiste(producto)) {
 	    	model.addAttribute("yaExiste", true);
@@ -161,7 +161,7 @@ public class ProductoController {
 	   	if(categoria.isPresent()) {
 	   		producto.setCategoria(categoria.get()); 	
 	   		productoService.save(producto);
-	   		sendEmail(producto.getNombre());
+	   		//sendEmail(producto.getNombre());
 	   		return "guardado";
 	   	} else {
 	   		return "placas";

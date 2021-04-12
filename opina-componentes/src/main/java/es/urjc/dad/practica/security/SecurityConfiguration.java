@@ -20,28 +20,28 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		// Public pages
 		http.authorizeRequests().antMatchers("/").permitAll();
 		http.authorizeRequests().antMatchers("/graficas").permitAll();
-		http.authorizeRequests().antMatchers("/graficas/*").permitAll();
+		http.authorizeRequests().antMatchers("/graficas/**").permitAll();
 		http.authorizeRequests().antMatchers("/procesadores").permitAll();
-		http.authorizeRequests().antMatchers("/procesadores/*").permitAll();
+		http.authorizeRequests().antMatchers("/procesadores/**").permitAll();
 		http.authorizeRequests().antMatchers("/placas").permitAll();
-		http.authorizeRequests().antMatchers("/placas/*").permitAll();
+		http.authorizeRequests().antMatchers("/placas/**").permitAll();
 		http.authorizeRequests().antMatchers("/login").permitAll();
 		http.authorizeRequests().antMatchers("/registro").permitAll();
 		http.authorizeRequests().antMatchers("/loginerror").permitAll();
 		http.authorizeRequests().antMatchers("/cerrar_sesion").permitAll();
 		
 		// USER pages
-		http.authorizeRequests().antMatchers("/procesadores/nuevo").hasAnyRole("USER");
-		http.authorizeRequests().antMatchers("/graficas/nueva").hasAnyRole("USER");
-		http.authorizeRequests().antMatchers("/placas/nueva").hasAnyRole("USER");
+		http.authorizeRequests().antMatchers("/nuevoprocesador").hasAnyRole("USER");
+		http.authorizeRequests().antMatchers("/nuevagrafica").hasAnyRole("USER");
+		http.authorizeRequests().antMatchers("/nuevaplaca").hasAnyRole("USER");
 		http.authorizeRequests().antMatchers("/ver_usuarios").hasAnyRole("USER");
-		http.authorizeRequests().antMatchers("/ver_usuarios/*").hasAnyRole("USER");
+		//http.authorizeRequests().antMatchers("/ver_usuarios/**").hasAnyRole("USER");
 		http.authorizeRequests().antMatchers("/*/*/nueva_valoracion").hasAnyRole("USER");
 		
 		// ADMIN pages
 		http.authorizeRequests().antMatchers("/*/eliminar").hasAnyRole("ADMIN");
-		http.authorizeRequests().antMatchers("/ver_usuarios/*/eliminar").hasAnyRole("ADMIN");
-		http.authorizeRequests().antMatchers("/valoracion/*/eliminar").hasAnyRole("ADMIN");
+		http.authorizeRequests().antMatchers("/ver_usuarios/**/eliminar").hasAnyRole("ADMIN");
+		http.authorizeRequests().antMatchers("/valoracion/**/eliminar").hasAnyRole("ADMIN");
 		
 		// Login form
 		http.formLogin().loginPage("/login");

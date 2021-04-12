@@ -58,7 +58,7 @@ public class ProductoService {
 	}
 	
 	public Boolean yaExiste(Producto producto) {
-		if(productos.findByNombre(producto.getNombre()) != null) {
+		if(productos.findByNombre(producto.getNombre()).isPresent()) {
 			return true;
 		}
 		return false;

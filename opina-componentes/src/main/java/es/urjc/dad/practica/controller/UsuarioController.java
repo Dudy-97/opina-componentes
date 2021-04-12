@@ -1,6 +1,8 @@
 package es.urjc.dad.practica.controller;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import es.urjc.dad.practica.model.*;
 import es.urjc.dad.practica.service.*;
@@ -20,17 +23,6 @@ public class UsuarioController {
 	@Autowired
 	private UsuarioService usuarioService;
 	
-	@Autowired
-	private UserSession userSession;
-	
-	
-	
-	@GetMapping("/cerrar_sesion")
-	public String cerrarSesion(Model model) {
-		userSession.setUsuario(null);
-		model.addAttribute("sesion_iniciada", false);
-		return "index";
-	}
     
     @GetMapping("/ver_usuarios")
     public String verUsuarios(Model model) {
@@ -65,25 +57,34 @@ public class UsuarioController {
     }
     
     @PostMapping("/registro")
-    public String nuevoUsuario(Model model, Usuario usuario) {
+    public String nuevoUsuario(Model model, @RequestParam("email") String email,
+    		@RequestParam("nombre") String nombre, @RequestParam("pass") String pass) {
     	
-    	if(usuario.getEmail()==null || usuario.getNombre()==null || usuario.getPass()==null) {
+    	if(email=="" || nombre=="" || pass=="") {
     		model.addAttribute("faltan_campos", true);
-    		return "registro";
-    	} else if(usuarioService.yaExiste(usuario)) {
-    		model.addAttribute("yaExiste", true);
     		return "registro";
     	}
     	
-    	usuarioService.save(usuario);
+    	Usuario usuario = new Usuario(email, nombre, pass, "ROLE_USER");
     	
-    	userSession.setUsuario(usuario);
-    	
-    	model.addAttribute("sesion_iniciada", true);
-    	
-    	return "guardado";
+    	if(usuarioService.yaExiste(usuario)) {
+    		model.addAttribute("yaExiste", true);
+    		return "registro";
+    	} else {
+    		usuarioService.save(usuario);
+    		return login();
+    	}
     }
 	
+    @GetMapping("/login")
+	public String login() {
+		return "login";
+	}
 	
-	
+	@GetMapping("/loginerror")
+	public String loginerror() {
+		return "loginerror";
+	}
 }
+	
+

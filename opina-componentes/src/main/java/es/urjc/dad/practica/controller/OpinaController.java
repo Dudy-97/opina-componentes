@@ -1,7 +1,8 @@
 package es.urjc.dad.practica.controller;
 
-
 import java.util.Optional;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,41 +20,27 @@ public class OpinaController {
 	@Autowired
 	private UsuarioService usuarioService;
 	
-	@Autowired
-	private UserSession userSession;
-	
-	
 	//index
 	@GetMapping("/")
-	public String menuPrincipal(Model model) {
+	public String menuPrincipal(Model model, HttpServletRequest request) {
 		
-		Usuario usuario = userSession.getUsuario();
+		Optional<Usuario> usuario;
 		
-    	if(usuario != null  ) {
-    		model.addAttribute("sesion_iniciada", true);
-    		model.addAttribute("usuario", usuario);
-    	} else {
-    		model.addAttribute("sesion_iniciada", false);
-    	}
+		if(request.getUserPrincipal() != null) {
+			usuario = usuarioService.findByNombre(request.getUserPrincipal().getName());
+			
+			if(usuario.isPresent()) {
+				model.addAttribute("sesion_iniciada", true);
+				model.addAttribute("usuario", usuario.get().getNombre());
+			} else {
+				model.addAttribute("sesion_iniciada", false);
+			}
+		}
 		return "index";
 	}
-	
-    
-	@GetMapping("/login")
-	public String login(Model model) {
-		return "login";
-	}
-	
-	/*@PostMapping("/login")
-	public String login(Model model, Usuario usuario) {	
-		return "login";
-	}*/
-	
-	@GetMapping("/loginerror")
-	public String loginerror() {
-		return "loginerror";
-	}
 }
+	
+	
 
 
 
