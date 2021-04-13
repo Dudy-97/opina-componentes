@@ -4,12 +4,16 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import es.urjc.dad.practica.model.*;
@@ -72,14 +76,37 @@ public class UsuarioController {
     		return "registro";
     	} else {
     		usuarioService.save(usuario);
-    		return login();
+    		return "login";
     	}
     }
+    
+    @GetMapping("/login") //como se deberia hacer
+	public String login(Model model, HttpServletRequest request) {
 	
-    @GetMapping("/login")
-	public String login() {
+	CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
+	 model.addAttribute("token", token.getToken());
+	 System.out.println(token);
+	
 		return "login";
 	}
+    
+    
+  
+    //como funciona
+//    @GetMapping("/login")
+//	public String login() {
+//		return "login";
+//	}
+//    
+//    @RequestMapping("/login")
+//   	public String login(Model model, HttpServletRequest request) {
+//    	
+//    	CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
+//    	 model.addAttribute("token", token.getToken());
+//    	 System.out.println(token);
+//    	
+//   		return "login";
+//   	}
 	
 	@GetMapping("/loginerror")
 	public String loginerror() {

@@ -4,6 +4,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
@@ -61,7 +63,12 @@ public class ProductoController {
     }
     
     @PostMapping("/nuevoprocesador")
-    public String nuevoProcesador(Model model, Producto producto) {
+    public String nuevoProcesador(Model model, Producto producto, HttpServletRequest request) {
+    	
+    	String nombre = request.getUserPrincipal().getName();
+    	
+    	Usuario usuario = usuarioService.findByNombre(nombre).orElseThrow();
+    	
     	if(productoService.yaExiste(producto)) {
     		model.addAttribute("yaExiste", true);
     		return "nuevo_procesador";
@@ -81,6 +88,7 @@ public class ProductoController {
 	//Metodos graficas
 	@GetMapping("/graficas")
 	public String graficas(Model model) {
+		
 		List<Producto> graficas = productoService.findByCategoriaNombre("Tarjeta grafica");
 		
 		model.addAttribute("graficas", graficas);

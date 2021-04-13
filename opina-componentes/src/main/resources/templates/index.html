@@ -4,7 +4,10 @@
         <br>
         {{#sesion_iniciada}}
         	<p>Has iniciado sesion como: {{usuario}}</p>
-        	<a href="/cerrar_sesion">Cerrar sesion</a>
+        	<form action= "cerrar_sesion" method = "post" >
+        	   <input type= "submit" value= "Cerrar sesion"/>
+        	   <input type="hidden" name= "_csrf" value="{{token}}"/>
+        	</form>
         {{/sesion_iniciada}}
         
         {{^sesion_iniciada}}

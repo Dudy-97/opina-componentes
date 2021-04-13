@@ -14,9 +14,10 @@ public class DatabaseUsersLoader {
 	@Autowired
 	private UsuarioRepository usuarioRepository;
 	
-	@PostConstruct
-	private void initDatabase() {
-		usuarioRepository.save(new Usuario("angel@email.com", "Angel", "admin", "ROLE_USER", "ROLE_ADMIN"));
-		usuarioRepository.save(new Usuario("victor@email.com", "Victor", "admin", "ROLE_USER", "ROLE_ADMIN"));
-	}
+//	@PostConstruct
+//	private void initDatabase() {
+//		usuarioRepository.save(new Usuario("angel@email.com", "Angel", "admin", "ROLE_USER", "ROLE_ADMIN"));
+//		usuarioRepository.save(new Usuario("victor@email.com", "Victor", "admin", "ROLE_USER", "ROLE_ADMIN"));
+//	}
+	
 }
