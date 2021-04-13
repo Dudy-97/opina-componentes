@@ -174,7 +174,7 @@ public class ProductoController {
 	   	if(categoria.isPresent()) {
 	   		producto.setCategoria(categoria.get()); 	
 	   		productoService.save(producto);
-	   		//sendEmail(producto.getNombre());
+	   		sendEmail(producto.getNombre());
 	   		return "guardado";
 	   	} else {
 	   		return "placas";
