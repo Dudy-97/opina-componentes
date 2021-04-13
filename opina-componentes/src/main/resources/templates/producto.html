@@ -8,6 +8,7 @@
 		<a href="/{{producto.id}}/eliminar">Eliminar producto</a>
 		<br>
 		<a href="/{{producto.categoria.id}}/{{producto.id}}/nueva_valoracion">Escribir valoracion</a>
+		<input type="hidden" name="_csrf" value="{{token}}" />
 		<p>Valoraciones de los usuarios:</p>
 		<hr>
 		{{#valoraciones}}

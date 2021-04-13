@@ -34,31 +34,33 @@ public class ProductoController {
 	private UsuarioService usuarioService;
 	
 	private RestTemplate restTemplate = new RestTemplate();
-	private final String EMAIL_URL = "http://localhost:9000/SendEmail";
+	private final String EMAIL_URL = "http://localhost:9000/sendEmail";
 	
 	//Metodos de procesadores
 	
 	@GetMapping("/procesadores")
-	public String procesadores(Model model) {
+	public String procesadores(Model model, HttpServletRequest request) {
 		List<Producto> procesadores = productoService.findByCategoriaNombre("Procesador");
 		
 		model.addAttribute("procesadores", procesadores);
+		model.addAttribute("admin", request.isUserInRole("ADMIN"));
 		
 		return "procesadores";
 	}
 	
 	@GetMapping("/procesadores/{procesadorId}")
-    public String mostrarProcesador(Model model, @PathVariable int procesadorId) {
+    public String mostrarProcesador(Model model, @PathVariable int procesadorId, HttpServletRequest request) {
         Producto procesador = productoService.findById(procesadorId).orElseThrow();
         
         model.addAttribute("producto", procesador);
+        model.addAttribute("admin", request.isUserInRole("ADMIN"));
         model.addAttribute("valoraciones", procesador.getlValoraciones());
         
 		return "producto";
     }
 	
 	@GetMapping("/nuevoprocesador")
-    public String nuevoProcesador(Model model) {
+    public String nuevoProcesador(Model model, HttpServletRequest request) {
     	return "nuevo_procesador";
     }
     
@@ -66,7 +68,6 @@ public class ProductoController {
     public String nuevoProcesador(Model model, Producto producto, HttpServletRequest request) {
     	
     	String nombre = request.getUserPrincipal().getName();
-    	
     	Usuario usuario = usuarioService.findByNombre(nombre).orElseThrow();
     	
     	if(productoService.yaExiste(producto)) {
@@ -87,33 +88,35 @@ public class ProductoController {
 	
 	//Metodos graficas
 	@GetMapping("/graficas")
-	public String graficas(Model model) {
+	public String graficas(Model model, HttpServletRequest request) {
 		
 		List<Producto> graficas = productoService.findByCategoriaNombre("Tarjeta grafica");
 		
 		model.addAttribute("graficas", graficas);
+		model.addAttribute("admin", request.isUserInRole("ADMIN"));
 		
 		return "graficas";
 	}
 	
 	@GetMapping("/graficas/{graficaId}")
-	public String mostrarProducto(Model model, @PathVariable int graficaId) {
+	public String mostrarProducto(Model model, @PathVariable int graficaId, HttpServletRequest request) {
 		Producto grafica = productoService.findById(graficaId).orElseThrow();
 		
 		model.addAttribute("producto", grafica);
+		model.addAttribute("admin", request.isUserInRole("ADMIN"));
 		model.addAttribute("valoraciones", grafica.getlValoraciones());
 		
 		return "producto";
 	}
 	
     @GetMapping("/nuevagrafica")
-    public String nuevaGrafica(Model model) {
+    public String nuevaGrafica(Model model, HttpServletRequest request) {
     	
     	return "nueva_grafica";
     }
     
     @PostMapping("/nuevagrafica")
-    public String nuevaGrafica(Model model, Producto producto) {
+    public String nuevaGrafica(Model model, Producto producto, HttpServletRequest request) {
     	if(productoService.yaExiste(producto)) {
     		model.addAttribute("yaExiste", true);
     		return "nueva_grafica";
@@ -135,31 +138,33 @@ public class ProductoController {
 	
 	//Metodos placas
 	@GetMapping("/placas")
-	public String placas(Model model) {
+	public String placas(Model model, HttpServletRequest request) {
 		List<Producto> placas = productoService.findByCategoriaNombre("Placa base");
 		
 		model.addAttribute("placas", placas);
+		model.addAttribute("admin", request.isUserInRole("ADMIN"));
 		
 		return "placas";
 	}
 	
 	@GetMapping("/placas/{placaId}") 
-    public String mostrarPlacas(Model model, @PathVariable int placaId) {
+    public String mostrarPlacas(Model model, @PathVariable int placaId, HttpServletRequest request) {
     	Producto placa = productoService.findById(placaId).orElseThrow();
     	
     	model.addAttribute("producto", placa);
+    	model.addAttribute("admin", request.isUserInRole("ADMIN"));
     	model.addAttribute("valoraciones", placa.getlValoraciones());
     	
         return "producto";
     }
 	
 	@GetMapping("/nuevaplaca")
-	public String nuevaPlaca(Model model) {
+	public String nuevaPlaca(Model model, HttpServletRequest request) {
 	    return "nueva_placa";
 	}
 	    
 	@PostMapping("/nuevaplaca")
-	public String nuevaPlaca(Model model, Producto producto) {
+	public String nuevaPlaca(Model model, Producto producto, HttpServletRequest request) {
 		if(productoService.yaExiste(producto)) {
 	    	model.addAttribute("yaExiste", true);
 	    	return "nueva_placa";
@@ -178,7 +183,7 @@ public class ProductoController {
 	
 	//Metodo eliminar producto
     @GetMapping("/{id}/eliminar")
-    public String eliminarProducto(Model model, @PathVariable long id) {
+    public String eliminarProducto(Model model, @PathVariable long id, HttpServletRequest request) {
     	productoService.deleteById(id);
     	
     	return "eliminado";

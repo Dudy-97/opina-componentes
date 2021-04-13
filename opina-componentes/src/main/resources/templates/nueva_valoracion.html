@@ -8,6 +8,7 @@
 		        <p style="color:red">Para escribir una reseña, necesita un usuario</p>
 		    {{/nousuario}}
 			  <input type='submit' value='Aceptar'>
+			  <input type="hidden" name="_csrf" value="{{token}}" />
 		</form>
 	</body>
 </html>
