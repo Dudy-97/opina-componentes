@@ -67,9 +67,6 @@ public class ProductoController {
     @PostMapping("/nuevoprocesador")
     public String nuevoProcesador(Model model, Producto producto, HttpServletRequest request) {
     	
-    	String nombre = request.getUserPrincipal().getName();
-    	Usuario usuario = usuarioService.findByNombre(nombre).orElseThrow();
-    	
     	if(productoService.yaExiste(producto)) {
     		model.addAttribute("yaExiste", true);
     		return "nuevo_procesador";
@@ -79,6 +76,7 @@ public class ProductoController {
     	if (categoria.isPresent()) {
     		producto.setCategoria(categoria.get()); 	
     		productoService.save(producto);
+    		sendEmail(producto.getNombre());
     		return "guardado";
     	} else {
     		return "procesadores";
@@ -126,6 +124,7 @@ public class ProductoController {
     	if(categoria.isPresent()) {
     		producto.setCategoria(categoria.get()); 	
     		productoService.save(producto);
+    		sendEmail(producto.getNombre());
     		return "guardado";
     	} else {
     		return "graficas";

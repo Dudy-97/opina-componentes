@@ -45,9 +45,14 @@ public class ValoracionService {
 		return valoraciones.findById(id);
 	}
 	
+	public Optional<Valoracion> find(long id) {
+		return valoraciones.findById(id);
+	}
+	
 	public void deleteById(long id) {
 		this.valoraciones.deleteById(id);
 	}
+
 }
 
 

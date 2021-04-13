@@ -4,7 +4,11 @@
 		<p>Nombre: {{usuario.nombre}}</p>
      	<p>Email: {{usuario.email}}</p>
 		<br>
+		
+		{{#admin}}
 		<a href="/ver_usuarios/{{id}}/eliminar">Eliminar usuario</a>
+		{{/admin}}
+		
 		<br>
 		<p>Ha escrito {{numValoraciones}} valoraciones: </p>
         <hr>
@@ -13,6 +17,12 @@
             <p>Nota: {{nota}}</p>
             <p>Texto: {{texto}}</p>
             <br><hr>
+            			
+			{{#usuarioresena}}
+			<a href="/valoracion/{{id}}/eliminar">Eliminar valoracion</a>
+			<hr>
+			{{/usuarioresena}}
+			
        	{{/valoraciones}}
 
 

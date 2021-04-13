@@ -31,17 +31,19 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests().antMatchers("/cerrar_sesion").permitAll();
 		
 		// USER pages
+		
+		http.authorizeRequests().antMatchers("/ver_usuarios").hasAnyRole("USER");
+		http.authorizeRequests().antMatchers("/valoracion/**/eliminar").hasAnyRole("USER");
+		http.authorizeRequests().antMatchers("/*/*/nueva_valoracion").hasAnyRole("USER");	
+		//http.authorizeRequests().antMatchers("/ver_usuarios/**").hasAnyRole("USER");
+		
+		// ADMIN pages
 		http.authorizeRequests().antMatchers("/nuevoprocesador").hasAnyRole("ADMIN");
 		http.authorizeRequests().antMatchers("/nuevagrafica").hasAnyRole("ADMIN");
 		http.authorizeRequests().antMatchers("/nuevaplaca").hasAnyRole("ADMIN");
-		http.authorizeRequests().antMatchers("/ver_usuarios").hasAnyRole("USER");
-		//http.authorizeRequests().antMatchers("/ver_usuarios/**").hasAnyRole("USER");
-		http.authorizeRequests().antMatchers("/*/*/nueva_valoracion").hasAnyRole("USER");
-		
-		// ADMIN pages
 		http.authorizeRequests().antMatchers("/*/eliminar").hasAnyRole("ADMIN");
 		http.authorizeRequests().antMatchers("/ver_usuarios/**/eliminar").hasAnyRole("ADMIN");
-		http.authorizeRequests().antMatchers("/valoracion/**/eliminar").hasAnyRole("ADMIN");
+		
 		
 		// Login form
 		http.formLogin().loginPage("/login");

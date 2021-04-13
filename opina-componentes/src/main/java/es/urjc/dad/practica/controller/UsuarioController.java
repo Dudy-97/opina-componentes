@@ -38,9 +38,19 @@ public class UsuarioController {
     }
     
     @GetMapping("ver_usuarios/{id}")
-    public String verUsuario(Model model, @PathVariable long id) {
-    	Usuario usuario = usuarioService.findById(id).orElseThrow();
+    public String verUsuario(Model model, @PathVariable long id, HttpServletRequest request) {
     	
+    	Usuario usuario = usuarioService.findById(id).orElseThrow();
+    
+    	
+    	
+    	if(usuario.getNombre().equals(request.getUserPrincipal().getName() )) {
+    		model.addAttribute("usuarioresena", true);
+    	}else{
+    		model.addAttribute("usuarioresena", false);
+    	}
+    	
+    	model.addAttribute("admin", request.isUserInRole("ADMIN"));
     	model.addAttribute("usuario", usuario);
     	model.addAttribute("numValoraciones", usuario.getlValoraciones().size());
     	model.addAttribute("valoraciones", usuario.getlValoraciones());
@@ -80,7 +90,7 @@ public class UsuarioController {
     	}
     }
     
-    @GetMapping("/login") //como se deberia hacer
+    @GetMapping("/login") 
 	public String login(Model model, HttpServletRequest request) {
 	
 	CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
@@ -91,22 +101,6 @@ public class UsuarioController {
 	}
     
     
-  
-    //como funciona
-//    @GetMapping("/login")
-//	public String login() {
-//		return "login";
-//	}
-//    
-//    @RequestMapping("/login")
-//   	public String login(Model model, HttpServletRequest request) {
-//    	
-//    	CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
-//    	 model.addAttribute("token", token.getToken());
-//    	 System.out.println(token);
-//    	
-//   		return "login";
-//   	}
 	
 	@GetMapping("/loginerror")
 	public String loginerror() {

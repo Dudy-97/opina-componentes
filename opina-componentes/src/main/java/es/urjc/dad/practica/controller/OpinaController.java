@@ -38,6 +38,14 @@ public class OpinaController {
 		}
 		return "index";
 	}
+	
+	
+	//Todos los caminos llevan a roma
+	@GetMapping("/error")
+	public String ErrorHandler(Model model, HttpServletRequest request){
+		
+		return "error";
+	}
 }
 	
 	
