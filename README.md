@@ -159,7 +159,11 @@ Descripcion: En esta imagen se muestra el menu de login por el que se puede acce
 
   ## Diagrama de clases UML
   
-  ![DiagramaUML](https://user-images.githubusercontent.com/78860255/110377933-48fc4580-8055-11eb-88e1-561eb4af38b5.PNG)
+  Aplicación principal
+  ![UML_Principal](https://user-images.githubusercontent.com/78860255/114735362-60f67180-9d45-11eb-9b92-ff5af44428dc.PNG)
+
+  Servicio Interno
+  ![UML_ServicioInterno](https://user-images.githubusercontent.com/78860255/114735468-7cfa1300-9d45-11eb-90a1-14afe56fb449.PNG)
   
   ## Diagrama Entidad/Relación
  
