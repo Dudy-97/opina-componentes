@@ -159,15 +159,44 @@ Descripcion: En esta imagen se muestra el menu de login por el que se puede acce
 
   ## Diagrama de clases UML
   
-  Aplicación principal
+  ### Aplicación principal
   ![UML_Principal](https://user-images.githubusercontent.com/78860255/114735362-60f67180-9d45-11eb-9b92-ff5af44428dc.PNG)
 
-  Servicio Interno
+  ### Servicio Interno
   ![UML_ServicioInterno](https://user-images.githubusercontent.com/78860255/114735468-7cfa1300-9d45-11eb-90a1-14afe56fb449.PNG)
   
   ## Diagrama Entidad/Relación
  
   ![DiagramaER](https://user-images.githubusercontent.com/60407168/110366001-0717d300-8046-11eb-8862-33cb92f5f346.png)
 
+# Instrucciones de despliegue (Windows 10)
 
+ Para poder lanzar la aplicación es necesario tener de antemano Java y MySQL instalados en el ordenador donde se vaya a desplegar.
+ 
+ ## JAVA
+ 
+ Descargar e instalar JAVA 15 de la página de Oracle. Es posible que se requiera una cuenta de Oracle, el registro es gratuito.
+ 
+ ## MySQL
+ 
+ 1. Descargar el instalador para Windows de MySQL.
+ 2. Durante la instalación elegir el Worckbench y el Server.
+ 3. Dejar el servidor con los puertos por defecto.
+ 4. Abrir MySQL Workbench
+ 5. (Opcional) Crear otra conexión con los puertos por defecto si es necesario.
+ 6. Abrir la conexión.
+ 7. Crear un nuevo esquema de nombre "opinacomponentes".
+ 
+ My SQL ya está listo.
+ 
+ ## Aplicación
+ 
+ 1. Abrir MySQL Workbench y la conexión que se ha configurado previamente.
+ 2. Abrir dos CMDs
+ 3. Moverse con el mandato "cd" a la carpeta donde se encuentren los archivos .jar de la aplicación.
+ 4. En una consola ejecutar el mandato: "java -jar {Nombre del archivo del servicio interno}.jar" y esperar a que se termine de ejecutar.
+ 5. En la otra consola ejecutar: "java -jar {Nombre del archivo de la aplicación}.jar" y esperar a que se termine de ejecutar.
+ 6. Abrir un navegador e ir a la siguiente dirección: "https://localhost:8443".
+ 7. (Opcional) Aceptar entrar si sale el aviso de página no segura.
+ 
 
