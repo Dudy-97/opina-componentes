@@ -1,21 +1,24 @@
 package es.urjc.dad.practica.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ProductEmailMessage {
 
-	private String email;
+	private List<String> emails;
 	private String nombreProducto;
 	
-	public ProductEmailMessage(String email, String nombreProducto) {
-		this.email = email;
+	public ProductEmailMessage(List<String> emails, String nombreProducto) {
+		this.emails = new ArrayList<>(emails);
 		this.nombreProducto = nombreProducto;
 	}
 	
-	public String getEmail() {
-		return email;
+	public List<String> getEmails() {
+		return emails;
 	}
 	
-	public void setEmail(String email) {
-		this.email = email;
+	public void setEmail(List<String> emails) {
+		this.emails = new ArrayList<>(emails);
 	}
 	public String getNombreProducto() {
 		return nombreProducto;
@@ -26,7 +29,7 @@ public class ProductEmailMessage {
 
 	@Override
 	public String toString() {
-		return "ProductEmailMessage [email=" + email + ", nombreProducto=" + nombreProducto + "]";
+		return "ProductEmailMessage [emails=" + emails + ", nombreProducto=" + nombreProducto + "]";
 	}
 	
 	

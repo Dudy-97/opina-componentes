@@ -15,13 +15,16 @@ public class EmailController {
 	
 	@PostMapping("/sendEmail")
 	public ResponseEntity<Void> getEmail(@RequestBody ProductEmailMessage message) {
-		String to = message.getEmail();
-		String from = "OpinaComponentes";
-		String subject = "Se ha añadido un nuevo producto";
-		String text = "Hola!\n"
-				+ "Hemos añadido un nuevo producto a nuestra página: " + message.getNombreProducto() + "\n"
-				+ "Entra en la web para saber la opinión nuestros usuarios y dinos la tuya.";
-		emailService.sendSimpleMessage(to, from, subject, text);
+		for(String e : message.getEmails()) {
+			String to = e;
+			String from = "OpinaComponentes";
+			String subject = "Se ha añadido un nuevo producto";
+			String text = "Hola!\n"
+					+ "Hemos añadido un nuevo producto a nuestra página: " + message.getNombreProducto() + "\n"
+					+ "Entra en la web para saber la opinión nuestros usuarios y dinos la tuya.";
+			emailService.sendSimpleMessage(to, from, subject, text);
+		}
+		
 		return new ResponseEntity<>( HttpStatus.OK);
 	}
 }

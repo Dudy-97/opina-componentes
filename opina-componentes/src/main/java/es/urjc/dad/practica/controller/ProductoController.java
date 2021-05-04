@@ -1,5 +1,6 @@
 package es.urjc.dad.practica.controller;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
@@ -190,10 +191,16 @@ public class ProductoController {
     
     private void sendEmail(String nombreProducto) {
     	Collection<Usuario> usuarios = usuarioService.findAll();
+    	List<String> correos = new ArrayList<>();
     	for (Usuario  u : usuarios) {
-    		ProductEmailMessage mensaje = new ProductEmailMessage(u.getEmail(), nombreProducto);
+    		correos.add(u.getEmail());
+    		/*ProductEmailMessage mensaje = new ProductEmailMessage(u.getEmail(), nombreProducto);
     		HttpEntity<ProductEmailMessage> mensajeBody = new HttpEntity<>(mensaje);
-    		restTemplate.exchange(EMAIL_URL, HttpMethod.POST, mensajeBody, Void.class);
+    		restTemplate.exchange(EMAIL_URL, HttpMethod.POST, mensajeBody, Void.class);*/
     	}
+    	
+    	ProductEmailMessage mensaje = new ProductEmailMessage(correos, nombreProducto);
+    	HttpEntity<ProductEmailMessage> mensajeBody = new HttpEntity<>(mensaje);
+    	restTemplate.exchange(EMAIL_URL, HttpMethod.POST, mensajeBody, Void.class);
     }
 }
