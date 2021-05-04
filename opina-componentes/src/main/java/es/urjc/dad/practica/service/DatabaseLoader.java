@@ -33,8 +33,8 @@ public class DatabaseLoader {
 	
 	@PostConstruct
 	private void initDatabase() {
-		/*usuarioRepository.save(new Usuario("angel@email.com", "Angel", "admin", "ROLE_USER", "ROLE_ADMIN"));
-		usuarioRepository.save(new Usuario("victor@email.com", "Victor", "admin", "ROLE_USER", "ROLE_ADMIN"));	 
+		/*usuarioRepository.save(new Usuario("victor@email.com", "Victor", "admin", "ROLE_USER", "ROLE_ADMIN"));	 
+		usuarioRepository.save(new Usuario("angel@email.com", "Angel", "admin", "ROLE_USER", "ROLE_ADMIN"));
 		categoriaRepository.save(new Categoria("Tarjeta grafica"));
 		categoriaRepository.save(new Categoria("Procesador"));
 		categoriaRepository.save(new Categoria("Placa base"));
