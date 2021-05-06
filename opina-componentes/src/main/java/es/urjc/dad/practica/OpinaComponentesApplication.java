@@ -3,7 +3,6 @@ package es.urjc.dad.practica;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-
 //Adicion de cache-distribuida
 import java.util.Collections;
 import org.springframework.context.annotation.Bean;
@@ -11,9 +10,14 @@ import org.springframework.session.hazelcast.config.annotation.web.http.EnableHa
 
 import com.hazelcast.config.Config;
 import com.hazelcast.config.JoinConfig; 
+import org.springframework.cache.CacheManager;
+import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.cache.concurrent.ConcurrentMapCacheManager;
 
+@EnableCaching
 @SpringBootApplication
 @EnableHazelcastHttpSession
+
 public class OpinaComponentesApplication {
 
 	public static void main(String[] args) {
@@ -32,6 +36,11 @@ public class OpinaComponentesApplication {
         joinConfig.getTcpIpConfig().setEnabled(true).setMembers(Collections.singletonList("127.0.0.1"));
         return config;
     }
+	
+	@Bean
+	public CacheManager cacheManager(){
+		   return new ConcurrentMapCacheManager("cacheOC");
+	}
 	
 	
 }

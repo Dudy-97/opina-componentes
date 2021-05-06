@@ -26,9 +26,6 @@ public class DatabaseLoader {
 	
 	@Autowired
 	private ProductoRepository productoRepository;
-	
-	@Autowired
-	private ValoracionService valoracionService;
 
 	
 	@PostConstruct

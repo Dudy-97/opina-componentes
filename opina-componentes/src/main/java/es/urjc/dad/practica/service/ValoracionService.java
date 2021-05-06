@@ -11,6 +11,11 @@ import org.springframework.stereotype.Service;
 import es.urjc.dad.practica.model.Valoracion;
 import es.urjc.dad.practica.repository.ValoracionRepository;
 
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
+
+@CacheConfig(cacheNames = "cacheOC")
 @Service
 public class ValoracionService {
 
@@ -27,28 +32,29 @@ public class ValoracionService {
 	
 	@PostConstruct
 	public void init() {
-		/*save(new Valoracion(usuarioService.findByNombre("angel"), productoService.findByNombre("RTX 3070"),
-				85, "Ta wapa"));
-		save(new Valoracion(usuarioService.findByNombre("victor"), productoService.findByNombre("RTX 3070"),
-				90, "PC master race"));*/
 	}
 	
+	@CacheEvict(allEntries = true)
 	public void save(Valoracion valoracion) {
 		valoraciones.save(valoracion);
 	}
 	
+	@Cacheable
 	public Collection<Valoracion> findAll() {
 		return valoraciones.findAll();
 	}
 	
+	@Cacheable
 	public Optional<Valoracion> findById(long id) {
 		return valoraciones.findById(id);
 	}
 	
+	@Cacheable
 	public Optional<Valoracion> find(long id) {
 		return valoraciones.findById(id);
 	}
 	
+	@CacheEvict(allEntries = true)
 	public void deleteById(long id) {
 		this.valoraciones.deleteById(id);
 	}

@@ -12,6 +12,12 @@ import org.springframework.stereotype.Service;
 import es.urjc.dad.practica.model.Producto;
 import es.urjc.dad.practica.repository.ProductoRepository;
 
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
+
+@CacheConfig(cacheNames="cacheOC")
 @Service
 public class ProductoService {
 	
@@ -33,26 +39,33 @@ public class ProductoService {
         save(new Producto("Asus Rouge B450", "Placa base gaminmg barata", 40120, categoriaService.findByNombre("Placa base")));*/
 	}
 	
+	
+	@CacheEvict(allEntries = true)
 	public void save(Producto producto) {
 		productos.save(producto);
 	}
 	
+	@Cacheable
 	public Collection<Producto> findAll() {
 		return productos.findAll();
 	}
 	
+	@Cacheable
 	public List<Producto> findByCategoriaNombre(String categoria) {
 		return productos.findByCategoriaNombre(categoria);
 	}
 	
+	@Cacheable
 	public Optional<Producto> findById(long id) {
 		return productos.findById(id);
 	}
 	
+	@CacheEvict(allEntries = true)
 	public void deleteById(long id) {
 		this.productos.deleteById(id);
 	}
 	
+	@Cacheable
 	public Optional<Producto> findByNombre(String nombre) {
 		return productos.findByNombre(nombre);
 	}

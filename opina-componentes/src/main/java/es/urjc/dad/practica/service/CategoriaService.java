@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import es.urjc.dad.practica.model.Categoria;
 import es.urjc.dad.practica.repository.CategoriaRepository;
 
+
 @Service
 public class CategoriaService {
 
@@ -21,9 +22,6 @@ public class CategoriaService {
 	
 	@PostConstruct
 	public void init() {
-		/*save(new Categoria("Tarjeta grafica"));
-		save(new Categoria("Procesador"));
-		save(new Categoria("Placa base"));*/
 	}
 	
 	public void save(Categoria categoria) {
