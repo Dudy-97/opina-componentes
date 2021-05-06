@@ -31,12 +31,6 @@ public class ProductoService {
 	
 	@PostConstruct
 	public void init() {
-		/*save(new Producto("RTX 3070", "una buena grafica", 500, categoriaService.findByNombre("Tarjeta grafica")));
-		save(new Producto("RTX 3090", "una grafica mas mejor", 1500, categoriaService.findByNombre("Tarjeta grafica")));
-		save(new Producto("Ryzen 9", "el proce", 400, categoriaService.findByNombre("Procesador")));
-        save(new Producto("Intel 10900K", "el mejor procesador gaming ", 459, categoriaService.findByNombre("Procesador")));
-        save(new Producto("MSI z390", "una placa bien chida", 121200, categoriaService.findByNombre("Placa base")));
-        save(new Producto("Asus Rouge B450", "Placa base gaminmg barata", 40120, categoriaService.findByNombre("Placa base")));*/
 	}
 	
 	
@@ -60,7 +54,7 @@ public class ProductoService {
 		return productos.findById(id);
 	}
 	
-	@CacheEvict(allEntries = true)
+	@CacheEvict
 	public void deleteById(long id) {
 		this.productos.deleteById(id);
 	}
