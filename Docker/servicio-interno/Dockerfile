@@ -1,4 +1,4 @@
-FROM openjdk:11-jre
+FROM openjdk:15
 
 COPY oc-servicio-interno-0.0.1-SNAPSHOT.jar oc-servicio-interno.jar
 

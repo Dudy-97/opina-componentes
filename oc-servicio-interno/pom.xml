@@ -10,11 +10,11 @@
 	</parent>
 	<groupId>es.urjc.dad</groupId>
 	<artifactId>oc-servicio-interno</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0-RELEASE</version>
 	<name>oc-servicio-interno</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
-		<java.version>15</java.version>
+		<java.version>11</java.version>
 	</properties>
 	<dependencies>
 		<!-- <dependency>

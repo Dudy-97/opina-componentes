@@ -1,7 +1,7 @@
 version: '3'
 services:
     web:
-        image: openjdk:11-jre
+        image: openjdk:15
         build: ./opina-componentes/.
         expose:
          - 8443
@@ -11,7 +11,7 @@ services:
         restart: always
 
     si:
-        image: openjdk:11-jre
+        image: openjdk:15
         build: ./servicio-interno/.
         ports:
          - 9000:9000
