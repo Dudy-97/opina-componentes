@@ -1,4 +1,4 @@
-FROM openjdk:15
+FROM openjdk:latest
 
-COPY opina-componentes-0.0.2-RELEASE.jar opina-componentes.jar
+COPY opina-componentes-1.0-RELEASE.jar opina-componentes.jar
 CMD ["java", "-jar", "opina-componentes.jar"]

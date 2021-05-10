@@ -1,18 +1,24 @@
 version: '3'
 services:
     web:
-        image: openjdk:15
-        build: ./opina-componentes/.
+        image: openjdk:latest
+        volumes:
+         - "./opina-componentes/opina-componentes-1.0-RELEASE.jar:/opina-componentes.jar"
+        environment:
+         - SPRING_DATASOURCE_URL=jdbc:mysql
+        command: "java -jar /opina-componentes.jar"
         expose:
          - 8443
-        depends_on:
+        links:
          - db
          - si
         restart: always
 
     si:
-        image: openjdk:15
-        build: ./servicio-interno/.
+        image: openjdk:latest
+        volumes:
+         - "./servicio-interno/oc-servicio-interno-1.0-RELEASE.jar:/oc-servicio-interno.jar"
+        command: "java -jar /oc-servicio-interno.jar"
         ports:
          - 9000:9000
         restart: always

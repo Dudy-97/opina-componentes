@@ -1,5 +1,5 @@
-FROM openjdk:15
+FROM openjdk:latest
 
-COPY oc-servicio-interno-0.0.1-SNAPSHOT.jar oc-servicio-interno.jar
+COPY oc-servicio-interno-1.0-RELEASE.jar oc-servicio-interno.jar
 
 CMD ["java", "-jar", "oc-servicio-interno.jar"]

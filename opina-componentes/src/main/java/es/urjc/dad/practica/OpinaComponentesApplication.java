@@ -32,8 +32,8 @@ public class OpinaComponentesApplication {
         JoinConfig joinConfig = config.getNetworkConfig().getJoin();
 
         //Multicast permite encontrar a otros usuarios con multicast de Hazelcast
-        joinConfig.getMulticastConfig().setEnabled(false);
-        joinConfig.getTcpIpConfig().setEnabled(true).setMembers(Collections.singletonList("127.0.0.1"));
+        joinConfig.getMulticastConfig().setEnabled(true);
+
         return config;
     }
 	
