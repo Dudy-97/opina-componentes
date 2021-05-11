@@ -1,6 +1,9 @@
 # OpinaComponentes
 
 
+ # Vídeo de la aplicación funcionanado
+ 
+ EN PROCESO
 
  # Descripción tematica de la web: 
 
@@ -160,7 +163,7 @@ Descripcion: En esta imagen se muestra el menu de login por el que se puede acce
   ## Diagrama de clases UML
   
   ### Aplicación principal
-  ![UML_Principal](https://user-images.githubusercontent.com/78860255/114735362-60f67180-9d45-11eb-9b92-ff5af44428dc.PNG)
+  ![Captura](https://user-images.githubusercontent.com/78860255/117804990-bba5bf00-b258-11eb-80bb-70482d134e4a.PNG)
 
   ### Servicio Interno
   ![UML_ServicioInterno](https://user-images.githubusercontent.com/78860255/114735468-7cfa1300-9d45-11eb-90a1-14afe56fb449.PNG)
@@ -168,6 +171,10 @@ Descripcion: En esta imagen se muestra el menu de login por el que se puede acce
   ## Diagrama Entidad/Relación
  
   ![DiagramaER](https://user-images.githubusercontent.com/60407168/110366001-0717d300-8046-11eb-8862-33cb92f5f346.png)
+
+# Diagrama de la infraestructura
+
+![diagrama_balanceador](https://user-images.githubusercontent.com/78860255/117804865-94e78880-b258-11eb-85a7-1113649431f1.png)
 
 # Instrucciones de despliegue (Windows 10)
 
