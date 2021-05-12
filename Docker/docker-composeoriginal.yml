@@ -1,0 +1,42 @@
+version: '3'
+services:
+    web:
+        image: openjdk:latest
+        volumes:
+         - "./opina-componentes/opina-componentes-1.0-RELEASE.jar:/opina-componentes.jar"
+        environment:
+         - SPRING_DATASOURCE_URL=jdbc:mysql://db/opinacomponentes
+        command: "java -jar /opina-componentes.jar"
+        expose:
+         - 8443
+        links:
+         - db
+         - si
+        restart: always
+
+    si:
+        image: openjdk:latest
+        volumes:
+         - "./servicio-interno/oc-servicio-interno-1.0-RELEASE.jar:/oc-servicio-interno.jar"
+        command: "java -jar /oc-servicio-interno.jar"
+        ports:
+         - 9000:9000
+        restart: always
+
+    db:
+        image: mysql/mysql-server:latest
+        ports:
+         - 3306:3306
+        environment:
+         - MYSQL_ROOT_PASSWORD=password
+         - MYSQL_DATABASE=opinacomponentes
+         - MYSQL_ROOT_HOST=%
+
+    nginx:
+        image: nginx:latest
+        volumes:
+         - ./nginx.conf:/etc/nginx/nginx.conf:ro
+        depends_on:
+         - web
+        ports:
+         - 4000:4000

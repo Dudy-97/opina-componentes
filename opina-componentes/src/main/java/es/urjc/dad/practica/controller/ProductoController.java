@@ -35,7 +35,7 @@ public class ProductoController {
 	private UsuarioService usuarioService;
 	
 	private RestTemplate restTemplate = new RestTemplate();
-	private final String EMAIL_URL = "http://localhost:9000/sendEmail";
+	private final String EMAIL_URL = "http://si:9000/sendEmail";
 	
 	//Metodos de procesadores
 	
