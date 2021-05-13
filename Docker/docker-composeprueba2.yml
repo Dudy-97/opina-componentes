@@ -33,11 +33,21 @@ services:
          - MYSQL_ROOT_HOST=%
 
     nginx:
-        image: nginx:latest
+        image: nginx:latest 
+        restart: always
         volumes:
-         - "./System32:/Windows/System32"
-         - "./nginx.conf:/etc/nginx/nginx.conf:ro"
+          - ./data/nginx:/etc/nginx/conf.d
+          - ./data/certbot/conf:/etc/letsencrypt
+          - ./data/certbot/www:/var/www/certbot
         depends_on:
          - web
         ports:
          - 4000:4000
+         - 443:443
+
+    certbot:
+       image: certbot/certbot
+       restart: always
+       volumes:
+         - /data/certbot/conf:/etc/letsencrypt
+         - /data/certbot/www:/var/www/certbot

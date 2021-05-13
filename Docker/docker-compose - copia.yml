@@ -35,7 +35,7 @@ services:
     nginx:
         image: nginx:latest
         volumes:
-         - "./System32:/Windows/System32"
+         - "./certs:/Docker/certs"
          - "./nginx.conf:/etc/nginx/nginx.conf:ro"
         depends_on:
          - web
