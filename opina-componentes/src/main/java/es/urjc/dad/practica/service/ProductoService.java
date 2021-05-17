@@ -54,7 +54,7 @@ public class ProductoService {
 		return productos.findById(id);
 	}
 	
-	@CacheEvict
+	@CacheEvict(allEntries = true)
 	public void deleteById(long id) {
 		this.productos.deleteById(id);
 	}

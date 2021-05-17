@@ -47,7 +47,7 @@ public class UsuarioService {
 		return usuarios.findById(id);
 	}
 	
-	@CacheEvict
+	@CacheEvict(allEntries = true)
 	public void deleteById(long id) {
 		this.usuarios.deleteById(id);
 	}

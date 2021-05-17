@@ -54,7 +54,7 @@ public class ValoracionService {
 		return valoraciones.findById(id);
 	}
 	
-	@CacheEvict
+	@CacheEvict(allEntries = true)
 	public void deleteById(long id) {
 		this.valoraciones.deleteById(id);
 	}
